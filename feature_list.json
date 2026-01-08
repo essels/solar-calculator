@@ -441,7 +441,7 @@
       "description": "Jest and React Testing Library setup",
       "steps": ["Configure Jest with Next.js", "Add React Testing Library", "Create test utilities and mocks", "Add npm test script"],
       "acceptance_criteria": ["npm run test works", "Coverage report generates", "Mocks for external APIs work"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["SETUP-002"]
     },
@@ -451,7 +451,7 @@
       "description": "Calculation engine unit tests",
       "steps": ["Test all calculation functions", "Cover edge cases and boundaries", "Test with reference values", "Achieve 90%+ coverage on lib/solar/"],
       "acceptance_criteria": ["All functions have tests", "Edge cases covered", "Results match manual calculations"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["TEST-001", "CALC-008"]
     },
@@ -461,7 +461,7 @@
       "description": "API route integration tests",
       "steps": ["Test /api/calculate with valid inputs", "Test /api/calculate with invalid inputs", "Test /api/lead submission flow", "Mock external API calls"],
       "acceptance_criteria": ["All routes tested", "Error cases handled", "Mocks prevent external calls"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["TEST-001", "API-002"]
     },
@@ -471,7 +471,7 @@
       "description": "Playwright E2E test setup",
       "steps": ["Install and configure Playwright", "Add npm run test:e2e script", "Configure for Next.js dev server", "Create base test utilities"],
       "acceptance_criteria": ["Playwright runs against dev server", "Can interact with calculator", "Screenshots on failure"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["TEST-001"]
     },
@@ -481,7 +481,7 @@
       "description": "E2E test for complete user journey",
       "steps": ["Test landing to calculator navigation", "Test complete wizard flow", "Test results display", "Test lead capture submission"],
       "acceptance_criteria": ["Full journey completes", "Works on mobile viewport", "No console errors"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["TEST-004", "LEAD-004"]
     },

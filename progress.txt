@@ -236,3 +236,37 @@ Validation: UK postcode format regex
 - Updated layout.tsx with PWA metadata, viewport config, and PWAProvider
 - All components use dynamic imports with ssr: false for client-only rendering
 
+[2026-01-08T14:00:00Z] [ITER-1] [TEST-001..005] [COMPLETE] Testing infrastructure implemented
+- TEST-001: Jest and React Testing Library setup
+  - Installed jest, @types/jest, jest-environment-jsdom
+  - Installed @testing-library/react, @testing-library/jest-dom, @testing-library/user-event
+  - Created jest.config.ts with Next.js configuration
+  - Created jest.setup.ts with localStorage/sessionStorage/fetch mocks
+  - Added npm test, test:watch, test:coverage scripts
+- TEST-002: Calculation engine unit tests (50 tests)
+  - Created src/lib/solar/__tests__/calculations.test.ts
+  - Tests all calculation functions: system sizing, generation, financials, CO2
+  - 100% coverage on calculations.ts (exceeds 90% target)
+  - Edge cases and reference values covered
+- TEST-003: Lead scoring and validation tests (17 tests)
+  - Created src/lib/leads/__tests__/scoring.test.ts
+  - Created src/lib/validation/__tests__/lead-validation.test.ts
+  - Tests email, phone, name validation
+  - Tests lead scoring algorithm and categorisation
+  - 100% coverage on scoring.ts
+- TEST-004: Playwright E2E test setup
+  - Installed @playwright/test
+  - Created playwright.config.ts with chromium and mobile-chrome projects
+  - Configured webServer to start Next.js dev server
+  - Added npm test:e2e and test:e2e:ui scripts
+- TEST-005: E2E test for complete user journey
+  - Created e2e/user-journey.spec.ts
+  - Tests landing page display and CTA
+  - Tests navigation to calculator
+  - Tests postcode step completion
+  - Tests results page with mock data
+  - Tests mobile responsiveness
+  - Tests for no console errors
+  - Tests accessibility (heading structure, form labels)
+- Total: 79 unit tests passing, 8 E2E tests defined
+
