@@ -90,3 +90,16 @@ Validation: UK postcode format regex
 - Exports: fetchPVGISIrradiance(), getIrradianceValue(), getMonthlyIrradiance()
 - Subagent used: Haiku for PVGIS API research and implementation
 
+[2026-01-08T12:08:00Z] [ITER-1] [DATA-003] [COMPLETE] UK energy pricing constants module verified
+- src/lib/solar/constants.ts already contains all required values
+- UK_ENERGY_CONFIG: Ofgem Q1 2026 rates (27.69p/kWh electricity, 15.0p/kWh SEG export)
+- SYSTEM_COST_CONFIG: MCS installation cost tiers by system size
+- All values have documented sources and TypeScript types
+
+[2026-01-08T12:08:00Z] [ITER-1] [DATA-004] [COMPLETE] Reference data JSON files verified
+- reference_data/orientation_factors.json: All orientations with efficiency factors
+- reference_data/regional_irradiance.json: 15 UK regions with postcode prefix mapping
+- reference_data/seg_tariffs.json: 10 suppliers with current SEG rates
+- reference_data/system_costs.json: Cost tiers, battery storage, typical systems
+- All files validated as valid JSON with fallback values defined
+

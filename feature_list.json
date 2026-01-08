@@ -103,7 +103,7 @@
         "Document sources and update schedule"
       ],
       "acceptance_criteria": ["All values have documented sources", "TypeScript types enforce structure", "Easy to update quarterly"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["SETUP-003"]
     },
@@ -119,7 +119,7 @@
         "Add TypeScript types for all reference data"
       ],
       "acceptance_criteria": ["All JSON files valid and parseable", "Types match JSON structure", "Fallback values defined for missing data"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["SETUP-003"]
     },
