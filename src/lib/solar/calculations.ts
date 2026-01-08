@@ -53,11 +53,7 @@ export function calculateRecommendedSize(
   // kWp = usage / (irradiance × factors × system_loss)
 
   const effectiveIrradiance =
-    irradiance *
-    orientationFactor *
-    pitchFactor *
-    shadingFactor *
-    SOLAR_CONFIG.systemLossFactor;
+    irradiance * orientationFactor * pitchFactor * shadingFactor * SOLAR_CONFIG.systemLossFactor;
 
   // Aim for 90% of usage (accounting for self-consumption losses)
   const targetGeneration = annualUsage * 0.9;
@@ -74,10 +70,7 @@ export function calculateRecommendedSize(
 /**
  * Determine final system size considering roof constraints
  */
-export function determineFinalSystemSize(
-  recommendedKwp: number,
-  maxKwp: number
-): number {
+export function determineFinalSystemSize(recommendedKwp: number, maxKwp: number): number {
   // Use smaller of recommended and maximum
   const finalKwp = Math.min(recommendedKwp, maxKwp);
 
@@ -237,10 +230,7 @@ export function calculateSystemCost(systemSizeKwp: number): number {
 /**
  * Calculate simple payback period in years
  */
-export function calculatePaybackPeriod(
-  systemCost: number,
-  annualBenefit: number
-): number {
+export function calculatePaybackPeriod(systemCost: number, annualBenefit: number): number {
   if (annualBenefit <= 0) return Infinity;
   return Math.round((systemCost / annualBenefit) * 10) / 10;
 }
@@ -339,8 +329,7 @@ export function calculateSolarEstimate(
   const irradianceSource: 'PVGIS' | 'UK_AVERAGE' = irradiance ? 'PVGIS' : 'UK_AVERAGE';
 
   // Electricity rates
-  const electricityRate =
-    inputs.electricityUnitRate || UK_ENERGY_CONFIG.electricityRatePence;
+  const electricityRate = inputs.electricityUnitRate || UK_ENERGY_CONFIG.electricityRatePence;
   const exportRate = inputs.exportTariffRate || UK_ENERGY_CONFIG.segExportRatePence;
 
   // Calculate system size
@@ -370,10 +359,7 @@ export function calculateSolarEstimate(
   const exportedKwh = annualGeneration - selfConsumedKwh;
 
   // Monthly breakdown
-  const monthlyGeneration = calculateMonthlyGeneration(
-    annualGeneration,
-    selfConsumptionRatio
-  );
+  const monthlyGeneration = calculateMonthlyGeneration(annualGeneration, selfConsumptionRatio);
 
   // Financials
   const annualSavings = calculateAnnualSavings(selfConsumedKwh, electricityRate);

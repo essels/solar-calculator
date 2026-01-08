@@ -7,16 +7,7 @@
 // CALCULATOR INPUT TYPES
 // ═══════════════════════════════════════════════════════════════════
 
-export type RoofOrientation =
-  | 'N'
-  | 'NE'
-  | 'E'
-  | 'SE'
-  | 'S'
-  | 'SW'
-  | 'W'
-  | 'NW'
-  | 'flat';
+export type RoofOrientation = 'N' | 'NE' | 'E' | 'SE' | 'S' | 'SW' | 'W' | 'NW' | 'flat';
 
 export type ShadingLevel = 0 | 0.5 | 0.75 | 0.9 | 1.0;
 

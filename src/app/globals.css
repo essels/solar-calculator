@@ -1,13 +1,13 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* SolarQuote UK - Custom Theme Variables */
 :root {
   /* Solar-inspired green/yellow palette */
-  --primary: #2e7d32;        /* Forest green - trust, nature */
-  --primary-light: #4caf50;   /* Lighter green */
-  --primary-dark: #1b5e20;    /* Darker green */
-  --accent: #ffc107;          /* Solar yellow - energy, optimism */
-  --accent-light: #ffecb3;    /* Light yellow */
+  --primary: #2e7d32; /* Forest green - trust, nature */
+  --primary-light: #4caf50; /* Lighter green */
+  --primary-dark: #1b5e20; /* Darker green */
+  --accent: #ffc107; /* Solar yellow - energy, optimism */
+  --accent-light: #ffecb3; /* Light yellow */
 
   /* Neutral colours */
   --background: #ffffff;

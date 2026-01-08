@@ -169,9 +169,7 @@ export function getPitchFactor(pitch: number): number {
 
     if (clampedPitch >= lower && clampedPitch <= upper) {
       const ratio = (clampedPitch - lower) / (upper - lower);
-      return (
-        PITCH_FACTORS[lower] + ratio * (PITCH_FACTORS[upper] - PITCH_FACTORS[lower])
-      );
+      return PITCH_FACTORS[lower] + ratio * (PITCH_FACTORS[upper] - PITCH_FACTORS[lower]);
     }
   }
 

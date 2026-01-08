@@ -58,3 +58,11 @@ Validation: UK postcode format regex
 - npm run dev starts on localhost:3000, TypeScript compiles without errors
 - Subagent used: Haiku for setup verification recommendations
 
+[2026-01-08T11:55:00Z] [ITER-1] [SETUP-002] [COMPLETE] ESLint, Prettier, and Git hooks configured
+- ESLint configured with eslint-config-next/core-web-vitals and typescript rules
+- Prettier configured with single quotes, trailing commas, 100 char line width
+- Husky pre-commit hook runs lint-staged
+- lint-staged runs eslint --fix and prettier --write on staged .ts/.tsx files
+- npm run lint, npm run format commands work correctly
+- Subagent used: Haiku for ESLint/Prettier setup recommendations
+
