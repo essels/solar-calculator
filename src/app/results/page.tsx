@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 
 import type {
   CalculatorResults,
@@ -10,6 +11,46 @@ import type {
   ShadingLevel,
 } from '@/types/solar';
 import { calculateSolarEstimate } from '@/lib/solar/calculations';
+
+// Lazy load chart components to reduce initial bundle size
+const MonthlyGenerationChart = dynamic(
+  () =>
+    import('@/components/charts/MonthlyGenerationChart').then((mod) => mod.MonthlyGenerationChart),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
+
+const SavingsBreakdownChart = dynamic(
+  () =>
+    import('@/components/charts/SavingsBreakdownChart').then((mod) => mod.SavingsBreakdownChart),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
+
+const PaybackTimelineChart = dynamic(
+  () => import('@/components/charts/PaybackTimelineChart').then((mod) => mod.PaybackTimelineChart),
+  { ssr: false, loading: () => <ChartSkeleton /> }
+);
+
+function ChartSkeleton() {
+  return <div className="h-64 w-full animate-pulse rounded-lg bg-muted" />;
+}
+
+// Generate payback timeline data with annual degradation
+function generatePaybackData(annualBenefit: number, years: number) {
+  const degradationRate = 0.005; // 0.5% annual degradation
+  const data = [];
+  let cumulativeSavings = 0;
+
+  for (let year = 0; year <= years; year++) {
+    const yearlyBenefit = annualBenefit * Math.pow(1 - degradationRate, year);
+    cumulativeSavings += year === 0 ? 0 : yearlyBenefit;
+    data.push({
+      year,
+      cumulativeSavings: Math.round(cumulativeSavings),
+    });
+  }
+
+  return data;
+}
 
 interface StoredFormData {
   postcode: string;
@@ -189,6 +230,32 @@ export default function ResultsPage() {
             </div>
           </div>
 
+          {/* Monthly Generation Chart */}
+          <div className="rounded-lg border border-border bg-background p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-semibold text-foreground">Monthly Generation</h2>
+            <MonthlyGenerationChart
+              data={results.monthlyGeneration.map((m) => ({
+                month: m.monthName.slice(0, 3),
+                generation: Math.round(m.generationKwh),
+              }))}
+            />
+            <p className="mt-4 text-center text-xs text-foreground/60">
+              Generation varies throughout the year based on sunlight hours
+            </p>
+          </div>
+
+          {/* Savings Breakdown Chart */}
+          <div className="rounded-lg border border-border bg-background p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-semibold text-foreground">Savings Breakdown</h2>
+            <SavingsBreakdownChart
+              selfConsumedSavings={results.annualSavings}
+              exportEarnings={results.annualExportEarnings}
+            />
+            <p className="mt-4 text-center text-xs text-foreground/60">
+              Your total annual benefit from solar: £{Math.round(results.totalAnnualBenefit)}
+            </p>
+          </div>
+
           {/* Financial Details */}
           <div className="rounded-lg border border-border bg-background p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-semibold text-foreground">Financial Summary</h2>
@@ -212,6 +279,19 @@ export default function ResultsPage() {
                 value={`£${Math.round(results.roi25Years).toLocaleString()}`}
               />
             </div>
+          </div>
+
+          {/* Payback Timeline Chart */}
+          <div className="rounded-lg border border-border bg-background p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-semibold text-foreground">Payback Timeline</h2>
+            <PaybackTimelineChart
+              data={generatePaybackData(results.totalAnnualBenefit, 25)}
+              systemCost={results.estimatedSystemCost}
+              paybackYear={results.paybackPeriod}
+            />
+            <p className="mt-4 text-center text-xs text-foreground/60">
+              Your investment breaks even at year {results.paybackPeriod.toFixed(1)}
+            </p>
           </div>
 
           {/* Environmental Impact */}

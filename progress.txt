@@ -151,3 +151,17 @@ Validation: UK postcode format regex
 - Reads calculator inputs from sessionStorage
 - Uses calculateSolarEstimate from calculation engine
 
+[2026-01-08T13:00:00Z] [ITER-1] [UI-RES-002,004] [COMPLETE] Results page charts and CTAs
+- UI-RES-002: Added Recharts visualisations (lightweight, React-first library)
+  - MonthlyGenerationChart: Bar chart with 12 months of generation
+  - SavingsBreakdownChart: Donut chart showing self-consumption vs export
+  - PaybackTimelineChart: Area chart with cumulative savings and payback marker
+  - All charts use dynamic imports for code splitting (ssr: false)
+  - Charts are accessible with aria-label attributes
+  - Responsive design using ResponsiveContainer
+- UI-RES-004: CTA section for lead capture
+  - "Get Free Installer Quotes" primary CTA button
+  - "Download PDF Report" secondary CTA button
+  - Clear value proposition explaining benefit
+- Subagent used: Haiku for charting library research (recommended Recharts)
+

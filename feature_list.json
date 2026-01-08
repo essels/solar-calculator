@@ -311,7 +311,7 @@
       "description": "Results visualisations and charts",
       "steps": ["Add monthly generation chart", "Add payback timeline visualisation", "Add savings breakdown pie chart", "Use lightweight charting library"],
       "acceptance_criteria": ["Charts render on mobile", "Data matches calculation results", "Charts are accessible (alt text)"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["UI-RES-001"]
     },
@@ -331,7 +331,7 @@
       "description": "Results page CTA to lead capture",
       "steps": ["Add 'Get Your Full Report' CTA", "Add 'Get 3 Installer Quotes' CTA", "Explain value exchange clearly", "Track CTA clicks for analytics"],
       "acceptance_criteria": ["CTAs are prominent and clear", "Value proposition is compelling", "Clicking opens lead capture modal"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["UI-RES-002"]
     },
