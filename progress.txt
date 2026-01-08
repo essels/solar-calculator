@@ -72,3 +72,11 @@ Validation: UK postcode format regex
 - TypeScript types and constants scaffold already in place
 - .env.example configured with all required API URLs and pricing variables
 
+[2026-01-08T12:00:00Z] [ITER-1] [DATA-001] [COMPLETE] Postcode lookup integration with postcodes.io
+- Created src/lib/solar/postcodes.ts with full API client implementation
+- Official GOV.UK postcode regex (BS 7666) for format validation
+- postcodes.io API integration (free, no auth required)
+- localStorage caching with 7-day TTL and lazy expiry
+- Exports: lookupPostcode(), validatePostcode(), normalizePostcode(), PostcodeValidator class
+- Subagent used: Haiku for API research and implementation patterns
+

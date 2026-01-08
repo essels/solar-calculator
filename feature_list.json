@@ -71,7 +71,7 @@
         "Cache results in localStorage (7 day expiry)"
       ],
       "acceptance_criteria": ["Valid UK postcodes return coordinates", "Invalid postcodes show user-friendly error", "Partial postcodes validate correctly", "Cache hit avoids repeat API calls"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["SETUP-003"]
     },
