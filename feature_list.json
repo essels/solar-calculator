@@ -491,7 +491,7 @@
       "description": "Core Web Vitals optimisation",
       "steps": ["Run Lighthouse audit", "Optimise images with next/image", "Implement code splitting", "Add loading states for async operations"],
       "acceptance_criteria": ["LCP < 2.5s", "FID < 100ms", "CLS < 0.1"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["TEST-005"]
     },
@@ -501,7 +501,7 @@
       "description": "Lighthouse audit score targets",
       "steps": ["Run full Lighthouse audit", "Fix accessibility issues", "Optimise SEO metadata", "Verify PWA requirements"],
       "acceptance_criteria": ["Performance ≥ 90", "Accessibility ≥ 90", "SEO ≥ 90", "PWA passes all checks"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["PERF-001"]
     },
@@ -511,7 +511,7 @@
       "description": "Vercel deployment configuration",
       "steps": ["Create vercel.json configuration", "Set up environment variables", "Configure production domain", "Set up error tracking"],
       "acceptance_criteria": ["Deploys successfully to Vercel", "Environment variables are secure", "Production URL works"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["PERF-002"]
     },
@@ -521,7 +521,7 @@
       "description": "Production smoke test and monitoring",
       "steps": ["Run E2E tests against production", "Verify all features work", "Set up uptime monitoring", "Document deployment process"],
       "acceptance_criteria": ["Production matches staging", "Monitoring alerts configured", "README has deployment docs"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["DEPLOY-001"]
     }

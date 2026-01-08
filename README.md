@@ -5,6 +5,7 @@
 ## Files Created
 
 **RALPH_PROMPT.md** — The main prompt file containing:
+
 - Complete project structure specification
 - Subagent invocation templates for Haiku research
 - Initialization steps for the first iteration
@@ -14,6 +15,7 @@
 - Critical rules and anti-patterns
 
 **feature_list.json** — A JSON-based PRD with 45 features across 12 categories:
+
 - Project Setup (3 features)
 - Data Integration (4 features) - postcodes.io, PVGIS, UK pricing
 - Calculation Engine (8 features) - sizing, generation, financials, CO2
@@ -32,12 +34,14 @@
 **init.sh** — Build, test, and validation script
 
 **reference_data/** — UK-specific lookup tables:
+
 - `orientation_factors.json` — Roof orientation efficiency factors
 - `regional_irradiance.json` — UK regional solar irradiance by postcode
 - `seg_tariffs.json` — Smart Export Guarantee rates by supplier
 - `system_costs.json` — Installation costs by system size tier
 
 **src/lib/solar/** — Calculation engine:
+
 - `calculations.ts` — Core calculation functions (MCS methodology)
 - `constants.ts` — UK energy pricing (Ofgem Q1 2026)
 
@@ -55,18 +59,19 @@
 
 ## Key Features
 
-| Feature | Implementation |
-|---------|----------------|
-| Solar irradiance | PVGIS EU JRC API (free) |
-| UK postcodes | postcodes.io (free) |
-| Electricity rate | 27.69p/kWh (Ofgem Q1 2026) |
-| SEG export | 15p/kWh default |
-| Lead scoring | Hot/Warm/Cool based on potential |
-| PWA | Offline calculator, installable |
+| Feature          | Implementation                   |
+| ---------------- | -------------------------------- |
+| Solar irradiance | PVGIS EU JRC API (free)          |
+| UK postcodes     | postcodes.io (free)              |
+| Electricity rate | 27.69p/kWh (Ofgem Q1 2026)       |
+| SEG export       | 15p/kWh default                  |
+| Lead scoring     | Hot/Warm/Cool based on potential |
+| PWA              | Offline calculator, installable  |
 
 ## Subagent Pattern
 
 Before implementing complex features, the loop invokes **Claude Haiku** to:
+
 1. Scan existing code for reusable functions
 2. Verify current UK energy prices and regulations
 3. Check API documentation and rate limits
@@ -77,7 +82,76 @@ This ensures efficient iteration and prevents duplicated code.
 ## Calculator Accuracy
 
 Based on MCS (Microgeneration Certification Scheme) methodology:
+
 - Results within 10% of Energy Saving Trust calculator
 - Uses real PVGIS satellite data for irradiance
 - Accounts for orientation, pitch, shading factors
 - Applies 14% system losses (industry standard)
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Run tests
+npm run test           # Unit tests
+npm run test:coverage  # With coverage report
+npm run test:e2e       # E2E tests (requires dev server)
+
+# Build for production
+npm run build
+
+# Lint and format
+npm run lint
+npm run format
+```
+
+## Deployment
+
+### Vercel (Recommended)
+
+1. Connect your repository to Vercel
+2. Set environment variables (see `.env.example`)
+3. Deploy - Vercel will auto-detect Next.js
+
+### Environment Variables
+
+```bash
+# Optional - defaults are configured
+NEXT_PUBLIC_ELECTRICITY_RATE=27.69
+NEXT_PUBLIC_SEG_RATE=15.0
+NEXT_PUBLIC_LEAD_WEBHOOK_URL=https://your-webhook.com/leads
+```
+
+### Manual Deployment
+
+```bash
+npm run build
+npm run start
+```
+
+## API Endpoints
+
+| Endpoint         | Method | Description                          |
+| ---------------- | ------ | ------------------------------------ |
+| `/api/calculate` | POST   | Calculate solar estimate from inputs |
+| `/api/leads`     | POST   | Submit lead with calculation results |
+| `/api/report`    | GET    | Generate PDF report for calculation  |
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS 4
+- **Charts**: Recharts
+- **PDF**: jsPDF
+- **PWA**: next-pwa
+- **Testing**: Jest, React Testing Library, Playwright
+
+## License
+
+MIT
