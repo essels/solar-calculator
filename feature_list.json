@@ -129,7 +129,7 @@
       "description": "Maximum system size calculation from roof area",
       "steps": ["Implement calculateMaxSystemSize function", "Use 5m² per kWp (400W panels at 20% efficiency)", "Round to 1 decimal place", "Validate roof area within reasonable bounds"],
       "acceptance_criteria": ["30m² roof returns 6.0 kWp max", "Validation rejects <5m² and >500m²", "Unit tests cover edge cases"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["DATA-003"]
     },
@@ -139,7 +139,7 @@
       "description": "Recommended system size based on usage",
       "steps": ["Implement calculateRecommendedSize function", "Match to ~90% of annual electricity usage", "Factor in orientation, pitch, shading", "Return size in common increments (0.5 kWp)"],
       "acceptance_criteria": ["3000 kWh usage recommends ~3 kWp system", "South-facing gets smaller recommendation", "Shaded properties get larger recommendation"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["CALC-001", "DATA-002"]
     },
@@ -149,7 +149,7 @@
       "description": "Annual generation estimation",
       "steps": ["Implement calculateAnnualGeneration function", "Use formula: kWp × irradiance × factors × 0.86", "Apply orientation, pitch, shading factors", "Return whole kWh value"],
       "acceptance_criteria": ["4kWp south-facing in London ≈ 3400 kWh", "Results within 10% of EST calculator", "All factors correctly applied"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["CALC-002"]
     },
@@ -164,7 +164,7 @@
         "Return array with month names and values"
       ],
       "acceptance_criteria": ["June/July have highest values (~13%)", "December/January have lowest (~3-4%)", "Monthly values sum to annual total"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["CALC-003"]
     },
@@ -174,7 +174,7 @@
       "description": "Self-consumption ratio calculation",
       "steps": ["Implement calculateSelfConsumption function", "Define ratios by occupancy type", "Always home: 45%, Daytime: 50%, Evening: 25%", "Return both ratio and kWh values"],
       "acceptance_criteria": ["Ratios match MCS MGD 003 guidance", "Evening-only returns lowest ratio", "Unit tests cover all occupancy types"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["CALC-004"]
     },
@@ -184,7 +184,7 @@
       "description": "Financial calculations (savings and export)",
       "steps": ["Implement calculateAnnualSavings function", "Implement calculateExportEarnings function", "Calculate total annual benefit", "Use Ofgem rates from constants"],
       "acceptance_criteria": ["Savings = self-consumed × unit rate", "Export = exported × SEG rate", "Returns values in pounds (£)"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["CALC-005", "DATA-003"]
     },
@@ -199,7 +199,7 @@
         "Apply 0.5% annual panel degradation"
       ],
       "acceptance_criteria": ["Small systems use higher £/kWp rate", "Payback 7-12 years for typical UK install", "25-year ROI accounts for degradation"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["CALC-006"]
     },
@@ -209,7 +209,7 @@
       "description": "CO2 savings calculation",
       "steps": ["Implement calculateCO2Savings function", "Use UK grid carbon factor (0.233 kg/kWh)", "Calculate 25-year total with degradation", "Add relatable comparisons (trees, car miles)"],
       "acceptance_criteria": ["Uses current UK grid factor", "Annual and lifetime values returned", "Comparisons are accurate"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["CALC-003"]
     },

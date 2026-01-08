@@ -103,3 +103,14 @@ Validation: UK postcode format regex
 - reference_data/system_costs.json: Cost tiers, battery storage, typical systems
 - All files validated as valid JSON with fallback values defined
 
+[2026-01-08T12:12:00Z] [ITER-1] [CALC-001..CALC-008] [COMPLETE] All calculation engine features verified
+- CALC-001: calculateMaxSystemSize - 30m² returns 6.0 kWp max
+- CALC-002: calculateRecommendedSize - Uses 90% of usage target
+- CALC-003: calculateAnnualGeneration - Uses kWp × irradiance × factors × 0.86
+- CALC-004: getMonthlyDistribution - UK solar pattern (peak June/July at 13%)
+- CALC-005: calculateSelfConsumption - MCS MGD 003 ratios (always: 45%, daytime: 50%, evening: 25%)
+- CALC-006: calculateAnnualSavings, calculateExportEarnings - Uses Ofgem/SEG rates
+- CALC-007: calculateSystemCost (tiered), calculatePaybackPeriod, calculateROI25Years (with 0.5% degradation)
+- CALC-008: calculateCO2Savings - UK grid factor 0.233 kg/kWh
+- All functions already implemented in scaffold with full documentation
+
