@@ -245,7 +245,7 @@
       "description": "Calculator wizard container with progress",
       "steps": ["Create app/calculator/page.tsx", "Build wizard container component", "Add step progress indicator", "Implement step navigation state", "Add back/next buttons"],
       "acceptance_criteria": ["Progress shows current step clearly", "Navigation between steps is smooth", "State persists during session"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["UI-LAND-001"]
     },
@@ -261,7 +261,7 @@
         "Handle invalid postcode errors"
       ],
       "acceptance_criteria": ["Validates as user types", "Shows helpful error messages", "Confirms location before proceeding"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["UI-CALC-001", "DATA-001"]
     },
@@ -271,7 +271,7 @@
       "description": "Step 2: Roof details input",
       "steps": ["Create RoofDetailsStep component", "Add orientation selector (compass visual)", "Add pitch slider with presets", "Add roof area input with guidance", "Add shading level selector"],
       "acceptance_criteria": ["Compass selector is intuitive", "Defaults are sensible for UK", "Tooltips explain each field"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["UI-CALC-002"]
     },
@@ -281,7 +281,7 @@
       "description": "Step 3: Energy usage input",
       "steps": ["Create EnergyUsageStep component", "Add annual usage input (kWh)", "Add 'I don't know' estimation wizard", "Add home occupancy selector", "Show UK average comparisons"],
       "acceptance_criteria": ["Can enter exact or estimate usage", "Estimation asks property type, occupants", "Validates reasonable ranges"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["UI-CALC-003"]
     },
@@ -291,7 +291,7 @@
       "description": "Calculator state management",
       "steps": ["Create CalculatorContext with useReducer", "Persist state to localStorage", "Implement step validation before advance", "Add ability to go back and edit"],
       "acceptance_criteria": ["State survives page refresh", "Cannot advance with invalid data", "Can revisit and edit previous steps"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["UI-CALC-004"]
     },

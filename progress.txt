@@ -128,3 +128,11 @@ Validation: UK postcode format regex
 - Added footer with branding, legal links, and data source info
 - All sections responsive with mobile-first design
 
+[2026-01-08T12:30:00Z] [ITER-1] [UI-CALC-001..005] [COMPLETE] Calculator wizard with all steps
+- UI-CALC-001: Wizard container with progress bar and step navigation
+- UI-CALC-002: Step 1 - Postcode input with validation via postcodes.io API
+- UI-CALC-003: Step 2 - Roof details (orientation, pitch slider, area, shading)
+- UI-CALC-004: Step 3 - Energy usage input with "I know my usage" vs "estimate" toggle
+- UI-CALC-005: State management via useState, saved to sessionStorage for results page
+- Responsive design, validation before step advancement, loading states
+
