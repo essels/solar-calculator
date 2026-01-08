@@ -187,3 +187,25 @@ Validation: UK postcode format regex
   - Phone sanitization and formatting utilities
 - Subagent used: Haiku for UK GDPR compliance research
 
+[2026-01-08T13:30:00Z] [ITER-1] [LEAD-002..004,API-001,003] [COMPLETE] Lead scoring, PDF, thank you page, APIs
+- LEAD-002: Created lead scoring algorithm
+  - 8 scoring factors: system size, payback, savings, phone, name, self-consumption, roof area, usage
+  - Score thresholds: hot (70+), warm (40-69), cool (<40)
+  - Maximum 100 points possible
+  - Returns category, total score, and factor breakdown
+- LEAD-003/API-003: Created PDF report generation
+  - jsPDF library for server-side PDF generation
+  - Branded PDF with SolarQuote UK header
+  - Key metrics, financial summary, environmental impact sections
+  - Rate limiting (10 PDFs per hour per IP)
+- LEAD-004: Created thank you page
+  - Success confirmation with checkmark icon
+  - "What Happens Next" 3-step explanation
+  - Quote summary display (if available)
+  - PDF download CTA
+  - Social sharing buttons (Twitter, Facebook, LinkedIn)
+- API-001: Created /api/calculate POST endpoint
+  - Server-side validation of all calculator inputs
+  - UK location bounds checking (lat/long)
+  - CORS support for external API consumers
+

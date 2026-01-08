@@ -351,7 +351,7 @@
       "description": "Lead scoring algorithm",
       "steps": ["Implement calculateLeadScore function", "Score based on system size, payback, usage", "Add points for phone number provided", "Categorise as hot/warm/cool"],
       "acceptance_criteria": ["High-value indicators increase score", "Categories have clear thresholds", "Score is reproducible"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["LEAD-001", "CALC-007"]
     },
@@ -361,7 +361,7 @@
       "description": "PDF report generation",
       "steps": ["Create PDF template with branding", "Include all calculation results", "Add charts and visualisations", "Generate via API route"],
       "acceptance_criteria": ["PDF renders correctly", "All data is accurate", "Download works on mobile"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["LEAD-001", "UI-RES-002"]
     },
@@ -371,7 +371,7 @@
       "description": "Thank you page with next steps",
       "steps": ["Create post-submission thank you page", "Show confirmation of submission", "Provide PDF download link", "Set expectations for follow-up"],
       "acceptance_criteria": ["Confirms submission clearly", "PDF link works", "Social sharing options available"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["LEAD-003"]
     },
@@ -381,7 +381,7 @@
       "description": "Calculate API endpoint",
       "steps": ["Create app/api/calculate/route.ts", "Validate all input parameters", "Call calculation pipeline", "Return CalculatorResults JSON"],
       "acceptance_criteria": ["Responds within 500ms", "Returns 400 for invalid inputs", "Results match client calculations"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["CALC-007"]
     },
@@ -401,7 +401,7 @@
       "description": "PDF generation API endpoint",
       "steps": ["Create app/api/report/route.ts", "Accept calculation ID parameter", "Generate PDF using template", "Return PDF binary with correct headers"],
       "acceptance_criteria": ["Returns application/pdf content type", "PDF is valid and opens correctly", "Rate limited to prevent abuse"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["LEAD-003"]
     },
