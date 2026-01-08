@@ -1,0 +1,893 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "project": "SolarQuote UK",
+  "version": "1.0.0",
+  "completion_promise": "SOLAR_QUOTE_COMPLETE",
+  "total_features": 45,
+  "categories": {
+    "project_setup": 3,
+    "data_integration": 4,
+    "calculation_engine": 8,
+    "ui_landing": 2,
+    "ui_calculator": 5,
+    "ui_results": 4,
+    "lead_capture": 4,
+    "api_routes": 3,
+    "pwa": 3,
+    "testing": 5,
+    "performance": 2,
+    "deployment": 2
+  },
+  "features": [
+    {
+      "id": "SETUP-001",
+      "category": "project_setup",
+      "description": "Initialize Next.js 14 project with TypeScript and Tailwind",
+      "steps": [
+        "Run create-next-app with App Router and TypeScript",
+        "Configure Tailwind with UK-appropriate colour palette",
+        "Set up path aliases in tsconfig.json",
+        "Verify dev server starts without errors"
+      ],
+      "acceptance_criteria": [
+        "npm run dev starts on localhost:3000",
+        "TypeScript compiles without errors",
+        "Tailwind classes render correctly"
+      ],
+      "passes": true,
+      "blocked": false,
+      "dependencies": []
+    },
+    {
+      "id": "SETUP-002",
+      "category": "project_setup",
+      "description": "Configure ESLint, Prettier, and Git hooks",
+      "steps": [
+        "Configure ESLint with Next.js and TypeScript rules",
+        "Add Prettier configuration",
+        "Set up husky for pre-commit hooks",
+        "Add lint-staged for staged file linting"
+      ],
+      "acceptance_criteria": [
+        "npm run lint passes without errors",
+        "Prettier formats consistently",
+        "Pre-commit hook runs lint"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["SETUP-001"]
+    },
+    {
+      "id": "SETUP-003",
+      "category": "project_setup",
+      "description": "Create project folder structure and reference data",
+      "steps": [
+        "Create src/lib/solar/, src/components/, src/types/ directories",
+        "Create reference_data/ with JSON lookup tables",
+        "Copy TypeScript types and constants from scaffold",
+        "Create .env.example with all required variables"
+      ],
+      "acceptance_criteria": [
+        "All directories exist as specified",
+        "Reference data files are valid JSON",
+        "Types import without errors"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["SETUP-001"]
+    },
+    {
+      "id": "DATA-001",
+      "category": "data_integration",
+      "description": "Postcode lookup integration with postcodes.io",
+      "steps": [
+        "Create src/lib/solar/postcodes.ts API client",
+        "Implement UK postcode format validation regex",
+        "Extract latitude, longitude, region from response",
+        "Add error handling for invalid postcodes",
+        "Cache results in localStorage (7 day expiry)"
+      ],
+      "acceptance_criteria": [
+        "Valid UK postcodes return coordinates",
+        "Invalid postcodes show user-friendly error",
+        "Partial postcodes validate correctly",
+        "Cache hit avoids repeat API calls"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["SETUP-003"]
+    },
+    {
+      "id": "DATA-002",
+      "category": "data_integration",
+      "description": "PVGIS API integration for solar irradiance",
+      "steps": [
+        "Create src/lib/solar/pvgis.ts API client",
+        "Implement request with lat/long parameters",
+        "Parse annual and monthly irradiance from response",
+        "Handle rate limits (30 req/sec)",
+        "Add fallback to regional averages on failure"
+      ],
+      "acceptance_criteria": [
+        "Returns annual kWh/m² for UK locations",
+        "Handles different roof orientations via params",
+        "Falls back gracefully on API timeout",
+        "Unit tests mock API responses"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["DATA-001"]
+    },
+    {
+      "id": "DATA-003",
+      "category": "data_integration",
+      "description": "UK energy pricing constants module",
+      "steps": [
+        "Create src/lib/solar/constants.ts with Ofgem rates",
+        "Add Q1 2026 electricity rate (27.69p/kWh)",
+        "Add average SEG export tariffs",
+        "Add system cost tiers from MCS data",
+        "Document sources and update schedule"
+      ],
+      "acceptance_criteria": [
+        "All values have documented sources",
+        "TypeScript types enforce structure",
+        "Easy to update quarterly"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["SETUP-003"]
+    },
+    {
+      "id": "DATA-004",
+      "category": "data_integration",
+      "description": "Reference data JSON files for lookups",
+      "steps": [
+        "Create orientation_factors.json",
+        "Create regional_irradiance.json with UK regions",
+        "Create seg_tariffs.json with supplier rates",
+        "Create system_costs.json with size tiers",
+        "Add TypeScript types for all reference data"
+      ],
+      "acceptance_criteria": [
+        "All JSON files valid and parseable",
+        "Types match JSON structure",
+        "Fallback values defined for missing data"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["SETUP-003"]
+    },
+    {
+      "id": "CALC-001",
+      "category": "calculation_engine",
+      "description": "Maximum system size calculation from roof area",
+      "steps": [
+        "Implement calculateMaxSystemSize function",
+        "Use 5m² per kWp (400W panels at 20% efficiency)",
+        "Round to 1 decimal place",
+        "Validate roof area within reasonable bounds"
+      ],
+      "acceptance_criteria": [
+        "30m² roof returns 6.0 kWp max",
+        "Validation rejects <5m² and >500m²",
+        "Unit tests cover edge cases"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["DATA-003"]
+    },
+    {
+      "id": "CALC-002",
+      "category": "calculation_engine",
+      "description": "Recommended system size based on usage",
+      "steps": [
+        "Implement calculateRecommendedSize function",
+        "Match to ~90% of annual electricity usage",
+        "Factor in orientation, pitch, shading",
+        "Return size in common increments (0.5 kWp)"
+      ],
+      "acceptance_criteria": [
+        "3000 kWh usage recommends ~3 kWp system",
+        "South-facing gets smaller recommendation",
+        "Shaded properties get larger recommendation"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["CALC-001", "DATA-002"]
+    },
+    {
+      "id": "CALC-003",
+      "category": "calculation_engine",
+      "description": "Annual generation estimation",
+      "steps": [
+        "Implement calculateAnnualGeneration function",
+        "Use formula: kWp × irradiance × factors × 0.86",
+        "Apply orientation, pitch, shading factors",
+        "Return whole kWh value"
+      ],
+      "acceptance_criteria": [
+        "4kWp south-facing in London ≈ 3400 kWh",
+        "Results within 10% of EST calculator",
+        "All factors correctly applied"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["CALC-002"]
+    },
+    {
+      "id": "CALC-004",
+      "category": "calculation_engine",
+      "description": "Monthly generation distribution",
+      "steps": [
+        "Implement getMonthlyDistribution function",
+        "Use UK solar radiation pattern (peak June/July)",
+        "Implement calculateMonthlyGeneration function",
+        "Return array with month names and values"
+      ],
+      "acceptance_criteria": [
+        "June/July have highest values (~13%)",
+        "December/January have lowest (~3-4%)",
+        "Monthly values sum to annual total"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["CALC-003"]
+    },
+    {
+      "id": "CALC-005",
+      "category": "calculation_engine",
+      "description": "Self-consumption ratio calculation",
+      "steps": [
+        "Implement calculateSelfConsumption function",
+        "Define ratios by occupancy type",
+        "Always home: 45%, Daytime: 50%, Evening: 25%",
+        "Return both ratio and kWh values"
+      ],
+      "acceptance_criteria": [
+        "Ratios match MCS MGD 003 guidance",
+        "Evening-only returns lowest ratio",
+        "Unit tests cover all occupancy types"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["CALC-004"]
+    },
+    {
+      "id": "CALC-006",
+      "category": "calculation_engine",
+      "description": "Financial calculations (savings and export)",
+      "steps": [
+        "Implement calculateAnnualSavings function",
+        "Implement calculateExportEarnings function",
+        "Calculate total annual benefit",
+        "Use Ofgem rates from constants"
+      ],
+      "acceptance_criteria": [
+        "Savings = self-consumed × unit rate",
+        "Export = exported × SEG rate",
+        "Returns values in pounds (£)"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["CALC-005", "DATA-003"]
+    },
+    {
+      "id": "CALC-007",
+      "category": "calculation_engine",
+      "description": "System cost and payback calculation",
+      "steps": [
+        "Implement calculateSystemCost with tiered pricing",
+        "Implement calculatePaybackPeriod function",
+        "Implement calculateROI25Years with degradation",
+        "Apply 0.5% annual panel degradation"
+      ],
+      "acceptance_criteria": [
+        "Small systems use higher £/kWp rate",
+        "Payback 7-12 years for typical UK install",
+        "25-year ROI accounts for degradation"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["CALC-006"]
+    },
+    {
+      "id": "CALC-008",
+      "category": "calculation_engine",
+      "description": "CO2 savings calculation",
+      "steps": [
+        "Implement calculateCO2Savings function",
+        "Use UK grid carbon factor (0.233 kg/kWh)",
+        "Calculate 25-year total with degradation",
+        "Add relatable comparisons (trees, car miles)"
+      ],
+      "acceptance_criteria": [
+        "Uses current UK grid factor",
+        "Annual and lifetime values returned",
+        "Comparisons are accurate"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["CALC-003"]
+    },
+    {
+      "id": "UI-LAND-001",
+      "category": "ui_landing",
+      "description": "Landing page hero section with CTA",
+      "steps": [
+        "Create app/page.tsx with hero layout",
+        "Add value proposition headline",
+        "Add trust signals (MCS, data sources)",
+        "Create primary CTA button to calculator",
+        "Mobile-first responsive design"
+      ],
+      "acceptance_criteria": [
+        "CTA visible above fold on mobile",
+        "Loads in under 2 seconds",
+        "Passes Lighthouse accessibility checks"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["SETUP-002"]
+    },
+    {
+      "id": "UI-LAND-002",
+      "category": "ui_landing",
+      "description": "Landing page benefits and social proof",
+      "steps": [
+        "Add benefits section with icons",
+        "Add 'how it works' 3-step explanation",
+        "Add trust indicators section",
+        "Add footer with legal links"
+      ],
+      "acceptance_criteria": [
+        "Benefits clearly communicate value",
+        "Steps are scannable",
+        "Footer links to privacy policy"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["UI-LAND-001"]
+    },
+    {
+      "id": "UI-CALC-001",
+      "category": "ui_calculator",
+      "description": "Calculator wizard container with progress",
+      "steps": [
+        "Create app/calculator/page.tsx",
+        "Build wizard container component",
+        "Add step progress indicator",
+        "Implement step navigation state",
+        "Add back/next buttons"
+      ],
+      "acceptance_criteria": [
+        "Progress shows current step clearly",
+        "Navigation between steps is smooth",
+        "State persists during session"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["UI-LAND-001"]
+    },
+    {
+      "id": "UI-CALC-002",
+      "category": "ui_calculator",
+      "description": "Step 1: Postcode input with validation",
+      "steps": [
+        "Create PostcodeStep component",
+        "Add input with UK postcode validation",
+        "Show loading state during lookup",
+        "Display location confirmation with region",
+        "Handle invalid postcode errors"
+      ],
+      "acceptance_criteria": [
+        "Validates as user types",
+        "Shows helpful error messages",
+        "Confirms location before proceeding"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["UI-CALC-001", "DATA-001"]
+    },
+    {
+      "id": "UI-CALC-003",
+      "category": "ui_calculator",
+      "description": "Step 2: Roof details input",
+      "steps": [
+        "Create RoofDetailsStep component",
+        "Add orientation selector (compass visual)",
+        "Add pitch slider with presets",
+        "Add roof area input with guidance",
+        "Add shading level selector"
+      ],
+      "acceptance_criteria": [
+        "Compass selector is intuitive",
+        "Defaults are sensible for UK",
+        "Tooltips explain each field"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["UI-CALC-002"]
+    },
+    {
+      "id": "UI-CALC-004",
+      "category": "ui_calculator",
+      "description": "Step 3: Energy usage input",
+      "steps": [
+        "Create EnergyUsageStep component",
+        "Add annual usage input (kWh)",
+        "Add 'I don't know' estimation wizard",
+        "Add home occupancy selector",
+        "Show UK average comparisons"
+      ],
+      "acceptance_criteria": [
+        "Can enter exact or estimate usage",
+        "Estimation asks property type, occupants",
+        "Validates reasonable ranges"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["UI-CALC-003"]
+    },
+    {
+      "id": "UI-CALC-005",
+      "category": "ui_calculator",
+      "description": "Calculator state management",
+      "steps": [
+        "Create CalculatorContext with useReducer",
+        "Persist state to localStorage",
+        "Implement step validation before advance",
+        "Add ability to go back and edit"
+      ],
+      "acceptance_criteria": [
+        "State survives page refresh",
+        "Cannot advance with invalid data",
+        "Can revisit and edit previous steps"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["UI-CALC-004"]
+    },
+    {
+      "id": "UI-RES-001",
+      "category": "ui_results",
+      "description": "Results page layout and key metrics",
+      "steps": [
+        "Create app/results/page.tsx",
+        "Display recommended system size prominently",
+        "Show annual savings and export earnings",
+        "Display payback period",
+        "Show system cost estimate"
+      ],
+      "acceptance_criteria": [
+        "Key numbers immediately visible",
+        "Currency formatted correctly (£)",
+        "Mobile layout is readable"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["UI-CALC-005", "CALC-007"]
+    },
+    {
+      "id": "UI-RES-002",
+      "category": "ui_results",
+      "description": "Results visualisations and charts",
+      "steps": [
+        "Add monthly generation chart",
+        "Add payback timeline visualisation",
+        "Add savings breakdown pie chart",
+        "Use lightweight charting library"
+      ],
+      "acceptance_criteria": [
+        "Charts render on mobile",
+        "Data matches calculation results",
+        "Charts are accessible (alt text)"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["UI-RES-001"]
+    },
+    {
+      "id": "UI-RES-003",
+      "category": "ui_results",
+      "description": "Environmental impact display",
+      "steps": [
+        "Display CO2 saved annually",
+        "Show 25-year CO2 savings",
+        "Add relatable comparisons",
+        "Use engaging visual design"
+      ],
+      "acceptance_criteria": [
+        "CO2 values are accurate",
+        "Comparisons resonate (trees, car miles)",
+        "Section is visually distinct"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["UI-RES-001", "CALC-008"]
+    },
+    {
+      "id": "UI-RES-004",
+      "category": "ui_results",
+      "description": "Results page CTA to lead capture",
+      "steps": [
+        "Add 'Get Your Full Report' CTA",
+        "Add 'Get 3 Installer Quotes' CTA",
+        "Explain value exchange clearly",
+        "Track CTA clicks for analytics"
+      ],
+      "acceptance_criteria": [
+        "CTAs are prominent and clear",
+        "Value proposition is compelling",
+        "Clicking opens lead capture modal"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["UI-RES-002"]
+    },
+    {
+      "id": "LEAD-001",
+      "category": "lead_capture",
+      "description": "Lead capture modal form",
+      "steps": [
+        "Create LeadCaptureModal component",
+        "Add email input with validation",
+        "Add optional phone input (UK format)",
+        "Add optional name field",
+        "Add consent checkboxes (GDPR compliant)"
+      ],
+      "acceptance_criteria": [
+        "Email validation is RFC 5322 compliant",
+        "Phone accepts UK formats",
+        "Consent is explicit and recorded"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["UI-RES-004"]
+    },
+    {
+      "id": "LEAD-002",
+      "category": "lead_capture",
+      "description": "Lead scoring algorithm",
+      "steps": [
+        "Implement calculateLeadScore function",
+        "Score based on system size, payback, usage",
+        "Add points for phone number provided",
+        "Categorise as hot/warm/cool"
+      ],
+      "acceptance_criteria": [
+        "High-value indicators increase score",
+        "Categories have clear thresholds",
+        "Score is reproducible"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["LEAD-001", "CALC-007"]
+    },
+    {
+      "id": "LEAD-003",
+      "category": "lead_capture",
+      "description": "PDF report generation",
+      "steps": [
+        "Create PDF template with branding",
+        "Include all calculation results",
+        "Add charts and visualisations",
+        "Generate via API route"
+      ],
+      "acceptance_criteria": [
+        "PDF renders correctly",
+        "All data is accurate",
+        "Download works on mobile"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["LEAD-001", "UI-RES-002"]
+    },
+    {
+      "id": "LEAD-004",
+      "category": "lead_capture",
+      "description": "Thank you page with next steps",
+      "steps": [
+        "Create post-submission thank you page",
+        "Show confirmation of submission",
+        "Provide PDF download link",
+        "Set expectations for follow-up"
+      ],
+      "acceptance_criteria": [
+        "Confirms submission clearly",
+        "PDF link works",
+        "Social sharing options available"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["LEAD-003"]
+    },
+    {
+      "id": "API-001",
+      "category": "api_routes",
+      "description": "Calculate API endpoint",
+      "steps": [
+        "Create app/api/calculate/route.ts",
+        "Validate all input parameters",
+        "Call calculation pipeline",
+        "Return CalculatorResults JSON"
+      ],
+      "acceptance_criteria": [
+        "Responds within 500ms",
+        "Returns 400 for invalid inputs",
+        "Results match client calculations"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["CALC-007"]
+    },
+    {
+      "id": "API-002",
+      "category": "api_routes",
+      "description": "Lead submission API endpoint",
+      "steps": [
+        "Create app/api/lead/route.ts",
+        "Validate contact information",
+        "Calculate lead score",
+        "Store lead with calculation context",
+        "Forward to webhook if configured"
+      ],
+      "acceptance_criteria": [
+        "Validates email format",
+        "Records consent timestamp",
+        "Webhook receives lead data"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["API-001", "LEAD-002"]
+    },
+    {
+      "id": "API-003",
+      "category": "api_routes",
+      "description": "PDF generation API endpoint",
+      "steps": [
+        "Create app/api/report/route.ts",
+        "Accept calculation ID parameter",
+        "Generate PDF using template",
+        "Return PDF binary with correct headers"
+      ],
+      "acceptance_criteria": [
+        "Returns application/pdf content type",
+        "PDF is valid and opens correctly",
+        "Rate limited to prevent abuse"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["LEAD-003"]
+    },
+    {
+      "id": "PWA-001",
+      "category": "pwa",
+      "description": "PWA manifest and service worker",
+      "steps": [
+        "Install and configure next-pwa",
+        "Create manifest.json with branding",
+        "Configure service worker for offline",
+        "Add all required icon sizes"
+      ],
+      "acceptance_criteria": [
+        "Lighthouse PWA audit passes",
+        "Install prompt appears on mobile",
+        "Icons display correctly"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["SETUP-001"]
+    },
+    {
+      "id": "PWA-002",
+      "category": "pwa",
+      "description": "Offline calculator functionality",
+      "steps": [
+        "Cache calculation constants",
+        "Cache reference data JSON files",
+        "Show offline indicator",
+        "Disable API-dependent features offline"
+      ],
+      "acceptance_criteria": [
+        "Calculator works without network",
+        "Clear indication of offline mode",
+        "Graceful degradation of features"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["PWA-001", "DATA-004"]
+    },
+    {
+      "id": "PWA-003",
+      "category": "pwa",
+      "description": "Add to Home Screen experience",
+      "steps": [
+        "Customise install prompt timing",
+        "Add install banner component",
+        "Track install events for analytics",
+        "Test on iOS and Android"
+      ],
+      "acceptance_criteria": [
+        "Prompt appears at appropriate time",
+        "App opens correctly from home screen",
+        "Splash screen displays branding"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["PWA-002"]
+    },
+    {
+      "id": "TEST-001",
+      "category": "testing",
+      "description": "Jest and React Testing Library setup",
+      "steps": [
+        "Configure Jest with Next.js",
+        "Add React Testing Library",
+        "Create test utilities and mocks",
+        "Add npm test script"
+      ],
+      "acceptance_criteria": [
+        "npm run test works",
+        "Coverage report generates",
+        "Mocks for external APIs work"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["SETUP-002"]
+    },
+    {
+      "id": "TEST-002",
+      "category": "testing",
+      "description": "Calculation engine unit tests",
+      "steps": [
+        "Test all calculation functions",
+        "Cover edge cases and boundaries",
+        "Test with reference values",
+        "Achieve 90%+ coverage on lib/solar/"
+      ],
+      "acceptance_criteria": [
+        "All functions have tests",
+        "Edge cases covered",
+        "Results match manual calculations"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["TEST-001", "CALC-008"]
+    },
+    {
+      "id": "TEST-003",
+      "category": "testing",
+      "description": "API route integration tests",
+      "steps": [
+        "Test /api/calculate with valid inputs",
+        "Test /api/calculate with invalid inputs",
+        "Test /api/lead submission flow",
+        "Mock external API calls"
+      ],
+      "acceptance_criteria": [
+        "All routes tested",
+        "Error cases handled",
+        "Mocks prevent external calls"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["TEST-001", "API-002"]
+    },
+    {
+      "id": "TEST-004",
+      "category": "testing",
+      "description": "Playwright E2E test setup",
+      "steps": [
+        "Install and configure Playwright",
+        "Add npm run test:e2e script",
+        "Configure for Next.js dev server",
+        "Create base test utilities"
+      ],
+      "acceptance_criteria": [
+        "Playwright runs against dev server",
+        "Can interact with calculator",
+        "Screenshots on failure"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["TEST-001"]
+    },
+    {
+      "id": "TEST-005",
+      "category": "testing",
+      "description": "E2E test for complete user journey",
+      "steps": [
+        "Test landing to calculator navigation",
+        "Test complete wizard flow",
+        "Test results display",
+        "Test lead capture submission"
+      ],
+      "acceptance_criteria": [
+        "Full journey completes",
+        "Works on mobile viewport",
+        "No console errors"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["TEST-004", "LEAD-004"]
+    },
+    {
+      "id": "PERF-001",
+      "category": "performance",
+      "description": "Core Web Vitals optimisation",
+      "steps": [
+        "Run Lighthouse audit",
+        "Optimise images with next/image",
+        "Implement code splitting",
+        "Add loading states for async operations"
+      ],
+      "acceptance_criteria": [
+        "LCP < 2.5s",
+        "FID < 100ms",
+        "CLS < 0.1"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["TEST-005"]
+    },
+    {
+      "id": "PERF-002",
+      "category": "performance",
+      "description": "Lighthouse audit score targets",
+      "steps": [
+        "Run full Lighthouse audit",
+        "Fix accessibility issues",
+        "Optimise SEO metadata",
+        "Verify PWA requirements"
+      ],
+      "acceptance_criteria": [
+        "Performance ≥ 90",
+        "Accessibility ≥ 90",
+        "SEO ≥ 90",
+        "PWA passes all checks"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["PERF-001"]
+    },
+    {
+      "id": "DEPLOY-001",
+      "category": "deployment",
+      "description": "Vercel deployment configuration",
+      "steps": [
+        "Create vercel.json configuration",
+        "Set up environment variables",
+        "Configure production domain",
+        "Set up error tracking"
+      ],
+      "acceptance_criteria": [
+        "Deploys successfully to Vercel",
+        "Environment variables are secure",
+        "Production URL works"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["PERF-002"]
+    },
+    {
+      "id": "DEPLOY-002",
+      "category": "deployment",
+      "description": "Production smoke test and monitoring",
+      "steps": [
+        "Run E2E tests against production",
+        "Verify all features work",
+        "Set up uptime monitoring",
+        "Document deployment process"
+      ],
+      "acceptance_criteria": [
+        "Production matches staging",
+        "Monitoring alerts configured",
+        "README has deployment docs"
+      ],
+      "passes": false,
+      "blocked": false,
+      "dependencies": ["DEPLOY-001"]
+    }
+  ]
+}

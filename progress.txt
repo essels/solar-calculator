@@ -1,0 +1,60 @@
+# SolarQuote UK - Ralph Loop Progress Tracker
+# ═══════════════════════════════════════════════════════════════════
+# Format: [TIMESTAMP] [ITERATION] [FEATURE] [STATUS] [NOTES]
+# ═══════════════════════════════════════════════════════════════════
+
+## Project Initialisation
+[2026-01-08T00:00:00Z] [INIT] [SCAFFOLD] [CREATED] Project scaffold created with Ralph Loop structure
+
+## Subagent Response Cache
+# Store successful subagent responses here to avoid repeated queries
+# Format: ### SUBAGENT: [QUERY_TYPE] - [DATE]
+
+### SUBAGENT: UK_ENERGY_PRICES - 2026-01-08
+```json
+{
+  "electricityRatePence": 27.69,
+  "segExportRatePence": 15.0,
+  "standingChargePence": 54.7,
+  "source": "Ofgem Price Cap Q1 2026",
+  "lastVerified": "2026-01-08"
+}
+```
+
+### SUBAGENT: PVGIS_API - 2026-01-08
+```
+Endpoint: https://re.jrc.ec.europa.eu/api/v5_3/PVcalc
+Method: GET
+Required params: lat, lon, peakpower, loss
+Optional: angle, aspect, outputformat (json)
+Rate limit: 30 requests/second
+Response: JSON with monthly/annual values
+```
+
+### SUBAGENT: POSTCODES_IO - 2026-01-08
+```
+Endpoint: https://api.postcodes.io/postcodes/{postcode}
+Method: GET
+No authentication required
+Returns: latitude, longitude, region, admin_district
+Validation: UK postcode format regex
+```
+
+## Iteration Log
+# ═══════════════════════════════════════════════════════════════════
+
+# [TIMESTAMP] [ITER-N] [FEATURE-ID] [STATUS] [NOTES]
+# STATUS: STARTED | IN_PROGRESS | COMPLETE | BLOCKED | SKIPPED
+
+# ═══════════════════════════════════════════════════════════════════
+# Session entries will be appended below
+# ═══════════════════════════════════════════════════════════════════
+
+[2026-01-08T11:45:00Z] [ITER-1] [SETUP-001] [COMPLETE] Next.js 14 project initialized
+- Used create-next-app@latest with --typescript --tailwind --eslint --app --src-dir
+- Preserved existing scaffold files (calculations.ts, constants.ts, solar.ts types)
+- Configured UK-appropriate green/solar colour palette in globals.css
+- Path aliases @/* configured in tsconfig.json
+- npm run dev starts on localhost:3000, TypeScript compiles without errors
+- Subagent used: Haiku for setup verification recommendations
+

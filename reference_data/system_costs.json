@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "UK solar PV system installation costs by size tier",
+  "source": "MCS Installation Database, Energy Saving Trust",
+  "lastUpdated": "2026-01-08",
+  "note": "Costs include panels, inverter, mounting, and installation labour",
+  "costTiers": [
+    {
+      "tier": "small",
+      "minKwp": 0,
+      "maxKwp": 3.0,
+      "costPerKwp": 1500,
+      "typicalPanels": "6-8",
+      "description": "1-2 bedroom home, basic needs"
+    },
+    {
+      "tier": "medium",
+      "minKwp": 3.0,
+      "maxKwp": 6.0,
+      "costPerKwp": 1300,
+      "typicalPanels": "8-15",
+      "description": "3-4 bedroom home, typical UK install"
+    },
+    {
+      "tier": "large",
+      "minKwp": 6.0,
+      "maxKwp": 12.0,
+      "costPerKwp": 1100,
+      "typicalPanels": "15-30",
+      "description": "Large home, high usage, EV charging"
+    },
+    {
+      "tier": "commercial",
+      "minKwp": 12.0,
+      "maxKwp": 50.0,
+      "costPerKwp": 950,
+      "typicalPanels": "30-125",
+      "description": "Commercial installations (out of scope)"
+    }
+  ],
+  "additionalCosts": {
+    "scaffolding": {
+      "typical": 500,
+      "included": true,
+      "note": "Usually included in quote"
+    },
+    "electricalUpgrade": {
+      "typical": 300,
+      "included": false,
+      "note": "May be required for older properties"
+    },
+    "roofRepairs": {
+      "typical": 0,
+      "included": false,
+      "note": "Additional if needed"
+    }
+  },
+  "batteryStorage": {
+    "note": "Battery costs are additional",
+    "typical3kWh": 2500,
+    "typical5kWh": 4000,
+    "typical10kWh": 6500,
+    "costPerKwh": 500
+  },
+  "typicalSystems": [
+    {
+      "name": "Starter",
+      "kwp": 2.0,
+      "panels": 5,
+      "estimatedCost": 3000,
+      "annualGeneration": 1700,
+      "suitableFor": "1-2 bed flat, low usage"
+    },
+    {
+      "name": "Standard",
+      "kwp": 3.5,
+      "panels": 9,
+      "estimatedCost": 5250,
+      "annualGeneration": 3000,
+      "suitableFor": "2-3 bed house, average usage"
+    },
+    {
+      "name": "Family",
+      "kwp": 5.0,
+      "panels": 12,
+      "estimatedCost": 6500,
+      "annualGeneration": 4250,
+      "suitableFor": "3-4 bed house, higher usage"
+    },
+    {
+      "name": "Premium",
+      "kwp": 7.0,
+      "panels": 17,
+      "estimatedCost": 7700,
+      "annualGeneration": 6000,
+      "suitableFor": "Large house, EV charging, heat pump"
+    },
+    {
+      "name": "Maximum",
+      "kwp": 10.0,
+      "panels": 25,
+      "estimatedCost": 11000,
+      "annualGeneration": 8500,
+      "suitableFor": "Large property, maximum self-sufficiency"
+    }
+  ],
+  "vatStatus": {
+    "rate": 0,
+    "note": "0% VAT on residential solar until 2027",
+    "source": "UK Government Energy Bill Reduction Scheme"
+  },
+  "grants": {
+    "available": false,
+    "note": "No direct grants in 2026, but 0% VAT applies",
+    "historicalSchemes": ["Feed-in Tariff (closed 2019)"]
+  }
+}

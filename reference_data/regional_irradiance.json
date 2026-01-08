@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "UK regional solar irradiance fallback values (kWh/m²/year)",
+  "source": "Met Office / Energy Saving Trust regional data",
+  "lastUpdated": "2026-01-08",
+  "note": "Use PVGIS API when available; these are fallbacks",
+  "regions": {
+    "South West": {
+      "irradiance": 1100,
+      "peakMonth": "June",
+      "annualSunHours": 1750
+    },
+    "South East": {
+      "irradiance": 1050,
+      "peakMonth": "June",
+      "annualSunHours": 1700
+    },
+    "London": {
+      "irradiance": 1000,
+      "peakMonth": "June",
+      "annualSunHours": 1550
+    },
+    "East of England": {
+      "irradiance": 1000,
+      "peakMonth": "June",
+      "annualSunHours": 1650
+    },
+    "West Midlands": {
+      "irradiance": 950,
+      "peakMonth": "June",
+      "annualSunHours": 1500
+    },
+    "East Midlands": {
+      "irradiance": 950,
+      "peakMonth": "June",
+      "annualSunHours": 1500
+    },
+    "Yorkshire and The Humber": {
+      "irradiance": 920,
+      "peakMonth": "June",
+      "annualSunHours": 1450
+    },
+    "North West": {
+      "irradiance": 900,
+      "peakMonth": "June",
+      "annualSunHours": 1400
+    },
+    "North East": {
+      "irradiance": 900,
+      "peakMonth": "June",
+      "annualSunHours": 1400
+    },
+    "Wales": {
+      "irradiance": 950,
+      "peakMonth": "June",
+      "annualSunHours": 1500
+    },
+    "Scotland - South": {
+      "irradiance": 900,
+      "peakMonth": "June",
+      "annualSunHours": 1400
+    },
+    "Scotland - Central": {
+      "irradiance": 880,
+      "peakMonth": "June",
+      "annualSunHours": 1350
+    },
+    "Scotland - North": {
+      "irradiance": 850,
+      "peakMonth": "June",
+      "annualSunHours": 1300
+    },
+    "Scottish Highlands": {
+      "irradiance": 800,
+      "peakMonth": "June",
+      "annualSunHours": 1200
+    },
+    "Northern Ireland": {
+      "irradiance": 900,
+      "peakMonth": "June",
+      "annualSunHours": 1350
+    }
+  },
+  "default": {
+    "irradiance": 950,
+    "peakMonth": "June",
+    "annualSunHours": 1450
+  },
+  "postcodeMapping": {
+    "TR": "South West",
+    "PL": "South West",
+    "EX": "South West",
+    "TQ": "South West",
+    "TA": "South West",
+    "BA": "South West",
+    "BS": "South West",
+    "DT": "South West",
+    "BH": "South West",
+    "SP": "South West",
+    "SO": "South East",
+    "PO": "South East",
+    "BN": "South East",
+    "RH": "South East",
+    "TN": "South East",
+    "CT": "South East",
+    "ME": "South East",
+    "DA": "South East",
+    "BR": "London",
+    "SE": "London",
+    "SW": "London",
+    "W": "London",
+    "WC": "London",
+    "EC": "London",
+    "E": "London",
+    "N": "London",
+    "NW": "London",
+    "IG": "London",
+    "RM": "London",
+    "EN": "London",
+    "HA": "London",
+    "UB": "London",
+    "TW": "London",
+    "KT": "London",
+    "SM": "London",
+    "CR": "London",
+    "CB": "East of England",
+    "IP": "East of England",
+    "NR": "East of England",
+    "PE": "East of England",
+    "CO": "East of England",
+    "CM": "East of England",
+    "SG": "East of England",
+    "AL": "East of England",
+    "LU": "East of England",
+    "MK": "East of England",
+    "B": "West Midlands",
+    "CV": "West Midlands",
+    "DY": "West Midlands",
+    "WS": "West Midlands",
+    "WV": "West Midlands",
+    "ST": "West Midlands",
+    "TF": "West Midlands",
+    "NN": "East Midlands",
+    "LE": "East Midlands",
+    "DE": "East Midlands",
+    "NG": "East Midlands",
+    "LN": "East Midlands",
+    "S": "Yorkshire and The Humber",
+    "DN": "Yorkshire and The Humber",
+    "HU": "Yorkshire and The Humber",
+    "YO": "Yorkshire and The Humber",
+    "LS": "Yorkshire and The Humber",
+    "WF": "Yorkshire and The Humber",
+    "HD": "Yorkshire and The Humber",
+    "HX": "Yorkshire and The Humber",
+    "BD": "Yorkshire and The Humber",
+    "M": "North West",
+    "OL": "North West",
+    "BL": "North West",
+    "WN": "North West",
+    "L": "North West",
+    "PR": "North West",
+    "BB": "North West",
+    "FY": "North West",
+    "LA": "North West",
+    "CA": "North West",
+    "WA": "North West",
+    "SK": "North West",
+    "CW": "North West",
+    "CH": "North West",
+    "NE": "North East",
+    "SR": "North East",
+    "DH": "North East",
+    "DL": "North East",
+    "TS": "North East",
+    "CF": "Wales",
+    "NP": "Wales",
+    "SA": "Wales",
+    "LD": "Wales",
+    "SY": "Wales",
+    "LL": "Wales",
+    "EH": "Scotland - Central",
+    "FK": "Scotland - Central",
+    "G": "Scotland - Central",
+    "ML": "Scotland - Central",
+    "PA": "Scotland - Central",
+    "KA": "Scotland - South",
+    "DG": "Scotland - South",
+    "TD": "Scotland - South",
+    "DD": "Scotland - North",
+    "PH": "Scotland - North",
+    "AB": "Scotland - North",
+    "IV": "Scottish Highlands",
+    "KW": "Scottish Highlands",
+    "HS": "Scottish Highlands",
+    "ZE": "Scottish Highlands",
+    "BT": "Northern Ireland"
+  }
+}

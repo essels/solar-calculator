@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "UK Smart Export Guarantee (SEG) tariff rates by supplier",
+  "source": "Solar Energy UK SEG tariff league table",
+  "lastUpdated": "2026-01-08",
+  "note": "Rates change frequently - use for estimates only",
+  "tariffs": [
+    {
+      "supplier": "Octopus Energy",
+      "tariffName": "Outgoing Fixed",
+      "ratePence": 15.0,
+      "type": "fixed",
+      "requirements": "Smart meter required",
+      "url": "https://octopus.energy/outgoing/"
+    },
+    {
+      "supplier": "Octopus Energy",
+      "tariffName": "Agile Outgoing",
+      "ratePence": 7.5,
+      "type": "variable",
+      "note": "Average rate - varies by half-hour",
+      "requirements": "Smart meter required",
+      "url": "https://octopus.energy/agile/"
+    },
+    {
+      "supplier": "British Gas",
+      "tariffName": "SEG",
+      "ratePence": 12.0,
+      "type": "fixed",
+      "requirements": "British Gas customer",
+      "url": "https://www.britishgas.co.uk/smart-export-guarantee.html"
+    },
+    {
+      "supplier": "EDF",
+      "tariffName": "Export",
+      "ratePence": 10.5,
+      "type": "fixed",
+      "requirements": "EDF customer preferred",
+      "url": "https://www.edfenergy.com/for-home/solar-panels"
+    },
+    {
+      "supplier": "E.ON Next",
+      "tariffName": "SEG",
+      "ratePence": 9.0,
+      "type": "fixed",
+      "requirements": "E.ON customer",
+      "url": "https://www.eonnext.com/smart-export-guarantee"
+    },
+    {
+      "supplier": "Scottish Power",
+      "tariffName": "SEG",
+      "ratePence": 8.5,
+      "type": "fixed",
+      "requirements": "Smart meter required",
+      "url": "https://www.scottishpower.co.uk/smart-export-guarantee"
+    },
+    {
+      "supplier": "OVO Energy",
+      "tariffName": "SEG",
+      "ratePence": 8.0,
+      "type": "fixed",
+      "requirements": "OVO customer",
+      "url": "https://www.ovoenergy.com/smart-export-guarantee"
+    },
+    {
+      "supplier": "Shell Energy",
+      "tariffName": "SEG",
+      "ratePence": 7.5,
+      "type": "fixed",
+      "requirements": "Shell Energy customer",
+      "url": "https://www.shellenergy.co.uk/smart-export-guarantee"
+    },
+    {
+      "supplier": "Bulb (Octopus)",
+      "tariffName": "SEG",
+      "ratePence": 6.0,
+      "type": "fixed",
+      "requirements": "Bulb customer",
+      "url": "https://bulb.co.uk/"
+    },
+    {
+      "supplier": "SSE",
+      "tariffName": "SEG",
+      "ratePence": 5.5,
+      "type": "fixed",
+      "requirements": "Smart meter required",
+      "url": "https://www.sse.co.uk/help/smart-export-guarantee"
+    }
+  ],
+  "statistics": {
+    "highestRate": 15.0,
+    "lowestRate": 5.5,
+    "averageRate": 9.0,
+    "medianRate": 8.25,
+    "recommendedDefault": 15.0
+  },
+  "calculatorDefaults": {
+    "conservative": 7.5,
+    "average": 10.0,
+    "optimistic": 15.0,
+    "default": 15.0
+  }
+}

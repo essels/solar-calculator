@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Roof orientation efficiency factors for UK solar installations",
+  "source": "Energy Saving Trust, MCS guidance",
+  "lastUpdated": "2026-01-08",
+  "factors": {
+    "S": {
+      "code": "S",
+      "name": "South",
+      "factor": 1.0,
+      "description": "Optimal orientation for UK"
+    },
+    "SE": {
+      "code": "SE",
+      "name": "South-East",
+      "factor": 0.95,
+      "description": "Excellent - morning sun advantage"
+    },
+    "SW": {
+      "code": "SW",
+      "name": "South-West",
+      "factor": 0.95,
+      "description": "Excellent - afternoon sun advantage"
+    },
+    "E": {
+      "code": "E",
+      "name": "East",
+      "factor": 0.85,
+      "description": "Good - morning generation only"
+    },
+    "W": {
+      "code": "W",
+      "name": "West",
+      "factor": 0.85,
+      "description": "Good - afternoon generation only"
+    },
+    "NE": {
+      "code": "NE",
+      "name": "North-East",
+      "factor": 0.70,
+      "description": "Reduced efficiency"
+    },
+    "NW": {
+      "code": "NW",
+      "name": "North-West",
+      "factor": 0.70,
+      "description": "Reduced efficiency"
+    },
+    "N": {
+      "code": "N",
+      "name": "North",
+      "factor": 0.55,
+      "description": "Significant reduction - not ideal"
+    },
+    "flat": {
+      "code": "flat",
+      "name": "Flat Roof",
+      "factor": 0.90,
+      "description": "With optimal tilt mounting"
+    }
+  },
+  "pitchFactors": {
+    "0": 0.90,
+    "10": 0.94,
+    "15": 0.96,
+    "20": 0.98,
+    "25": 0.99,
+    "30": 1.00,
+    "35": 1.00,
+    "40": 0.99,
+    "45": 0.97,
+    "50": 0.94,
+    "60": 0.88,
+    "70": 0.80,
+    "80": 0.70,
+    "90": 0.55
+  },
+  "optimalPitchUK": 35
+}
