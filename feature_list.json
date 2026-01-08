@@ -341,7 +341,7 @@
       "description": "Lead capture modal form",
       "steps": ["Create LeadCaptureModal component", "Add email input with validation", "Add optional phone input (UK format)", "Add optional name field", "Add consent checkboxes (GDPR compliant)"],
       "acceptance_criteria": ["Email validation is RFC 5322 compliant", "Phone accepts UK formats", "Consent is explicit and recorded"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["UI-RES-004"]
     },
@@ -391,7 +391,7 @@
       "description": "Lead submission API endpoint",
       "steps": ["Create app/api/lead/route.ts", "Validate contact information", "Calculate lead score", "Store lead with calculation context", "Forward to webhook if configured"],
       "acceptance_criteria": ["Validates email format", "Records consent timestamp", "Webhook receives lead data"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["API-001", "LEAD-002"]
     },

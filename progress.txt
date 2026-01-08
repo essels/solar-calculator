@@ -165,3 +165,25 @@ Validation: UK postcode format regex
   - Clear value proposition explaining benefit
 - Subagent used: Haiku for charting library research (recommended Recharts)
 
+[2026-01-08T13:15:00Z] [ITER-1] [LEAD-001,API-002] [COMPLETE] Lead capture modal and API
+- LEAD-001: Created LeadCaptureModal component with UK GDPR compliance
+  - Email input with RFC 5322 validation
+  - Optional UK phone input with validation regex
+  - Optional name field with validation
+  - Marketing consent checkbox (explicit, required)
+  - Privacy acceptance checkbox (explicit, required)
+  - Consent timestamp recorded for audit trail
+  - Responsive modal design with loading states
+- API-002: Created /api/leads POST endpoint
+  - Server-side validation of all inputs
+  - Rate limiting (5 submissions per hour per IP)
+  - Consent record storage with IP and user agent
+  - Email confirmation placeholder
+  - CORS headers for preflight requests
+- Created src/lib/validation/lead-validation.ts
+  - RFC 5322 email regex
+  - UK phone number regex (all common formats)
+  - Name validation
+  - Phone sanitization and formatting utilities
+- Subagent used: Haiku for UK GDPR compliance research
+
