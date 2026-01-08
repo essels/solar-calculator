@@ -136,3 +136,18 @@ Validation: UK postcode format regex
 - UI-CALC-005: State management via useState, saved to sessionStorage for results page
 - Responsive design, validation before step advancement, loading states
 
+[2026-01-08T12:45:00Z] [ITER-1] [UI-RES-001,003] [COMPLETE] Results page with key metrics and environmental impact
+- UI-RES-001: Created app/results/page.tsx with key metrics grid
+  - System size (kWp), number of panels displayed prominently
+  - Annual savings with breakdown (self-consumption + SEG export)
+  - Payback period in years
+  - Estimated system cost with installation
+  - MetricCard component for consistent styling
+- UI-RES-003: Environmental impact section
+  - CO2 saved annually (kg) and over 25 years (tonnes)
+  - Relatable comparisons: trees planted, car miles avoided
+  - Visually distinct green success styling
+- Mobile-first responsive design with Tailwind CSS
+- Reads calculator inputs from sessionStorage
+- Uses calculateSolarEstimate from calculation engine
+

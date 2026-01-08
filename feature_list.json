@@ -301,7 +301,7 @@
       "description": "Results page layout and key metrics",
       "steps": ["Create app/results/page.tsx", "Display recommended system size prominently", "Show annual savings and export earnings", "Display payback period", "Show system cost estimate"],
       "acceptance_criteria": ["Key numbers immediately visible", "Currency formatted correctly (£)", "Mobile layout is readable"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["UI-CALC-005", "CALC-007"]
     },
@@ -321,7 +321,7 @@
       "description": "Environmental impact display",
       "steps": ["Display CO2 saved annually", "Show 25-year CO2 savings", "Add relatable comparisons", "Use engaging visual design"],
       "acceptance_criteria": ["CO2 values are accurate", "Comparisons resonate (trees, car miles)", "Section is visually distinct"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["UI-RES-001", "CALC-008"]
     },
