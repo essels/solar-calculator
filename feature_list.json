@@ -55,7 +55,7 @@
         "Create .env.example with all required variables"
       ],
       "acceptance_criteria": ["All directories exist as specified", "Reference data files are valid JSON", "Types import without errors"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["SETUP-001"]
     },

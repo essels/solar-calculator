@@ -66,3 +66,9 @@ Validation: UK postcode format regex
 - npm run lint, npm run format commands work correctly
 - Subagent used: Haiku for ESLint/Prettier setup recommendations
 
+[2026-01-08T11:57:00Z] [ITER-1] [SETUP-003] [COMPLETE] Project folder structure and reference data verified
+- Directories created: src/lib/solar, src/lib/leads, src/lib/validation, src/components/{Calculator,Results,ui}, src/types
+- Reference data files validated: orientation_factors.json, regional_irradiance.json, seg_tariffs.json, system_costs.json
+- TypeScript types and constants scaffold already in place
+- .env.example configured with all required API URLs and pricing variables
+
