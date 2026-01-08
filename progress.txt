@@ -114,3 +114,10 @@ Validation: UK postcode format regex
 - CALC-008: calculateCO2Savings - UK grid factor 0.233 kg/kWh
 - All functions already implemented in scaffold with full documentation
 
+[2026-01-08T12:18:00Z] [ITER-1] [UI-LAND-001] [COMPLETE] Landing page hero section with CTA
+- Created responsive hero section with value proposition headline
+- Primary CTA button "Get Your Free Quote" links to /calculator
+- Trust signals: MCS Certified Methods, PVGIS Satellite Data, Ofgem Q1 2026 Prices
+- Stats section: Current rates (27.69p/kWh), SEG export (15p), payback period (7-10yr)
+- Mobile-first design with Tailwind CSS, uses theme variables
+

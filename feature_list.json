@@ -225,7 +225,7 @@
         "Mobile-first responsive design"
       ],
       "acceptance_criteria": ["CTA visible above fold on mobile", "Loads in under 2 seconds", "Passes Lighthouse accessibility checks"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["SETUP-002"]
     },
