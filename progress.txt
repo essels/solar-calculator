@@ -80,3 +80,13 @@ Validation: UK postcode format regex
 - Exports: lookupPostcode(), validatePostcode(), normalizePostcode(), PostcodeValidator class
 - Subagent used: Haiku for API research and implementation patterns
 
+[2026-01-08T12:05:00Z] [ITER-1] [DATA-002] [COMPLETE] PVGIS API integration for solar irradiance
+- Created src/lib/solar/pvgis.ts with full API client implementation
+- PVGIS API endpoint: https://re.jrc.ec.europa.eu/api/PVcalc
+- Supports custom tilt/azimuth parameters for different panel orientations
+- 10-second request timeout with AbortController
+- 24-hour localStorage caching with lazy expiry
+- Automatic fallback to regional irradiance on API failure/timeout
+- Exports: fetchPVGISIrradiance(), getIrradianceValue(), getMonthlyIrradiance()
+- Subagent used: Haiku for PVGIS API research and implementation
+

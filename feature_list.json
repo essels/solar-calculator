@@ -87,7 +87,7 @@
         "Add fallback to regional averages on failure"
       ],
       "acceptance_criteria": ["Returns annual kWh/m² for UK locations", "Handles different roof orientations via params", "Falls back gracefully on API timeout", "Unit tests mock API responses"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["DATA-001"]
     },
