@@ -235,7 +235,7 @@
       "description": "Landing page benefits and social proof",
       "steps": ["Add benefits section with icons", "Add 'how it works' 3-step explanation", "Add trust indicators section", "Add footer with legal links"],
       "acceptance_criteria": ["Benefits clearly communicate value", "Steps are scannable", "Footer links to privacy policy"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["UI-LAND-001"]
     },

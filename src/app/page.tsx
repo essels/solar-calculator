@@ -109,6 +109,181 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Benefits Section */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="mb-12 text-center text-3xl font-bold text-foreground">
+            Why Use Our Solar Calculator?
+          </h2>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {/* Benefit 1 */}
+            <div className="text-center">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+                <svg
+                  className="h-7 w-7 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-foreground">Accurate Estimates</h3>
+              <p className="text-sm text-foreground/60">
+                Based on your postcode, roof orientation, and actual UK energy prices for Q1 2026.
+              </p>
+            </div>
+
+            {/* Benefit 2 */}
+            <div className="text-center">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+                <svg
+                  className="h-7 w-7 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-foreground">Quick Results</h3>
+              <p className="text-sm text-foreground/60">
+                Get your personalised solar estimate in under 2 minutes. No registration required.
+              </p>
+            </div>
+
+            {/* Benefit 3 */}
+            <div className="text-center">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+                <svg
+                  className="h-7 w-7 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-foreground">Local Solar Data</h3>
+              <p className="text-sm text-foreground/60">
+                Uses PVGIS satellite data specific to your location for accurate generation
+                estimates.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="bg-muted/30 px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="mb-12 text-center text-3xl font-bold text-foreground">How It Works</h2>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {/* Step 1 */}
+            <div className="relative text-center">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-xl font-bold text-white">
+                1
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-foreground">Enter Your Postcode</h3>
+              <p className="text-sm text-foreground/60">
+                We use your postcode to calculate local solar irradiance and regional energy prices.
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="relative text-center">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-xl font-bold text-white">
+                2
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-foreground">Add Your Roof Details</h3>
+              <p className="text-sm text-foreground/60">
+                Tell us about your roof orientation, pitch, and approximate size for precise
+                calculations.
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="relative text-center">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-xl font-bold text-white">
+                3
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-foreground">Get Your Results</h3>
+              <p className="text-sm text-foreground/60">
+                See your potential savings, payback period, and recommended system size instantly.
+              </p>
+            </div>
+          </div>
+
+          {/* Secondary CTA */}
+          <div className="mt-12 text-center">
+            <Link
+              href="/calculator"
+              className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-6 font-semibold text-white shadow transition-all hover:bg-primary-dark hover:shadow-lg"
+            >
+              Start Your Calculation
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-background px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex flex-col items-center justify-between gap-6 text-sm text-foreground/60 md:flex-row">
+            <div className="flex items-center gap-2">
+              <svg
+                className="h-6 w-6 text-primary"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                stroke="none"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path
+                  d="M12 6v6l4 2"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <span className="font-semibold text-foreground">SolarQuote UK</span>
+            </div>
+            <div className="flex flex-wrap justify-center gap-6">
+              <Link href="/privacy" className="hover:text-foreground">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-foreground">
+                Terms of Service
+              </Link>
+              <Link href="/about" className="hover:text-foreground">
+                About
+              </Link>
+            </div>
+            <div className="text-center md:text-right">
+              <p>Prices updated Q1 2026</p>
+              <p>Estimates based on MCS methodology</p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -121,3 +121,10 @@ Validation: UK postcode format regex
 - Stats section: Current rates (27.69p/kWh), SEG export (15p), payback period (7-10yr)
 - Mobile-first design with Tailwind CSS, uses theme variables
 
+[2026-01-08T12:22:00Z] [ITER-1] [UI-LAND-002] [COMPLETE] Landing page benefits and social proof
+- Added "Why Use Our Solar Calculator?" benefits section with 3 benefit cards
+- Added "How It Works" 3-step explanation with numbered steps
+- Added secondary CTA "Start Your Calculation" button
+- Added footer with branding, legal links, and data source info
+- All sections responsive with mobile-first design
+
