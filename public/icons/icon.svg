@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#228B22" rx="64"/>
+  <g fill="#FFD700">
+    <!-- Sun circle -->
+    <circle cx="256" cy="256" r="80"/>
+    <!-- Sun rays -->
+    <rect x="246" y="100" width="20" height="60" rx="10"/>
+    <rect x="246" y="352" width="20" height="60" rx="10"/>
+    <rect x="100" y="246" width="60" height="20" rx="10"/>
+    <rect x="352" y="246" width="60" height="20" rx="10"/>
+    <rect x="145" y="145" width="20" height="50" rx="10" transform="rotate(45 155 170)"/>
+    <rect x="347" y="145" width="20" height="50" rx="10" transform="rotate(-45 357 170)"/>
+    <rect x="145" y="317" width="20" height="50" rx="10" transform="rotate(-45 155 342)"/>
+    <rect x="347" y="317" width="20" height="50" rx="10" transform="rotate(45 357 342)"/>
+  </g>
+  <!-- Solar panel -->
+  <g fill="#1a5f1a">
+    <rect x="180" y="340" width="152" height="100" rx="8"/>
+    <line x1="180" y1="365" x2="332" y2="365" stroke="#228B22" stroke-width="3"/>
+    <line x1="180" y1="390" x2="332" y2="390" stroke="#228B22" stroke-width="3"/>
+    <line x1="180" y1="415" x2="332" y2="415" stroke="#228B22" stroke-width="3"/>
+    <line x1="218" y1="340" x2="218" y2="440" stroke="#228B22" stroke-width="3"/>
+    <line x1="256" y1="340" x2="256" y2="440" stroke="#228B22" stroke-width="3"/>
+    <line x1="294" y1="340" x2="294" y2="440" stroke="#228B22" stroke-width="3"/>
+  </g>
+</svg>

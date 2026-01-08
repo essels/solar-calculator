@@ -411,7 +411,7 @@
       "description": "PWA manifest and service worker",
       "steps": ["Install and configure next-pwa", "Create manifest.json with branding", "Configure service worker for offline", "Add all required icon sizes"],
       "acceptance_criteria": ["Lighthouse PWA audit passes", "Install prompt appears on mobile", "Icons display correctly"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["SETUP-001"]
     },
@@ -421,7 +421,7 @@
       "description": "Offline calculator functionality",
       "steps": ["Cache calculation constants", "Cache reference data JSON files", "Show offline indicator", "Disable API-dependent features offline"],
       "acceptance_criteria": ["Calculator works without network", "Clear indication of offline mode", "Graceful degradation of features"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["PWA-001", "DATA-004"]
     },
@@ -431,7 +431,7 @@
       "description": "Add to Home Screen experience",
       "steps": ["Customise install prompt timing", "Add install banner component", "Track install events for analytics", "Test on iOS and Android"],
       "acceptance_criteria": ["Prompt appears at appropriate time", "App opens correctly from home screen", "Splash screen displays branding"],
-      "passes": false,
+      "passes": true,
       "blocked": false,
       "dependencies": ["PWA-002"]
     },

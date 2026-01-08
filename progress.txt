@@ -209,3 +209,30 @@ Validation: UK postcode format regex
   - UK location bounds checking (lat/long)
   - CORS support for external API consumers
 
+[2026-01-08T13:45:00Z] [ITER-1] [PWA-001..003] [COMPLETE] PWA features implemented
+- PWA-001: PWA manifest and service worker
+  - Installed and configured next-pwa package
+  - Created public/manifest.json with full PWA metadata
+  - Configured service worker with runtime caching strategies:
+    - CacheFirst for postcodes.io API (7 days)
+    - CacheFirst for PVGIS API (24 hours)
+    - CacheFirst for images (30 days)
+    - StaleWhileRevalidate for static resources (7 days)
+    - CacheFirst for reference_data JSON (7 days)
+  - Created SVG icon placeholder for PWA icons
+  - Created src/types/next-pwa.d.ts for TypeScript support
+- PWA-002: Offline calculator functionality
+  - Reference data cached via service worker runtime caching
+  - Created OfflineIndicator component using useSyncExternalStore
+  - Shows amber banner when offline: "You're offline. Some features may be limited."
+  - Graceful degradation with offline detection
+- PWA-003: Add to Home Screen experience
+  - Created InstallPrompt component with proper beforeinstallprompt handling
+  - Install banner appears at appropriate time (not immediately)
+  - Dismiss option with 7-day localStorage remember
+  - Uses useSyncExternalStore to avoid setState-in-effect issues
+  - Tracks appinstalled event
+- PWAProvider component wraps app with OfflineIndicator and InstallPrompt
+- Updated layout.tsx with PWA metadata, viewport config, and PWAProvider
+- All components use dynamic imports with ssr: false for client-only rendering
+
