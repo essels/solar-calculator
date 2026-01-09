@@ -67,6 +67,7 @@ const withPWA = withPWAInit({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  turbopack: {}, // Silence Turbopack warning - next-pwa uses webpack config
 };
 
 export default withPWA(nextConfig);
