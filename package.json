@@ -15,9 +15,13 @@
     "test:coverage": "jest --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "prepare": "husky"
+    "prepare": "husky",
+    "cf:build": "npx @opennextjs/cloudflare build",
+    "cf:preview": "npm run cf:build && wrangler dev",
+    "cf:deploy": "npm run cf:build && wrangler deploy"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "^1.14.8",
     "jspdf": "^4.0.0",
     "next": "16.1.1",
     "next-pwa": "^5.6.0",
@@ -46,7 +50,8 @@
     "prettier": "^3.7.4",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.58.0"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

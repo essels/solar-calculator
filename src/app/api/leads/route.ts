@@ -8,29 +8,6 @@ import { validateEmail, validateUKPhone } from '@/lib/validation/lead-validation
 import type { LeadContact, LeadConsent, LeadSubmitRequest } from '@/types/solar';
 
 /**
- * Rate limiting helper
- * In production, use a proper rate limiter like Redis
- */
-const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const record = rateLimitStore.get(ip);
-
-  if (!record || now > record.resetTime) {
-    rateLimitStore.set(ip, { count: 1, resetTime: now + 3600000 }); // 1 hour
-    return true;
-  }
-
-  if (record.count >= 5) {
-    return false; // 5 submissions per hour limit
-  }
-
-  record.count++;
-  return true;
-}
-
-/**
  * Validate lead submission
  */
 function validateLeadSubmission(
@@ -159,19 +136,11 @@ async function createLead(
  */
 export async function POST(request: NextRequest) {
   try {
-    // Get client IP
+    // Get client IP (for logging)
     const ip =
       request.headers.get('x-forwarded-for')?.split(',')[0] ||
       request.headers.get('x-real-ip') ||
       'unknown';
-
-    // Rate limiting
-    if (!checkRateLimit(ip)) {
-      return NextResponse.json(
-        { success: false, error: 'Too many requests. Please try again later.' },
-        { status: 429 }
-      );
-    }
 
     // Parse request body
     const body = await request.json();

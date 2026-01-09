@@ -1,5 +1,8 @@
 import type { NextConfig } from 'next';
 import withPWAInit from 'next-pwa';
+import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare';
+
+initOpenNextCloudflareForDev();
 
 const withPWA = withPWAInit({
   dest: 'public',
@@ -68,6 +71,7 @@ const withPWA = withPWAInit({
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   turbopack: {}, // Silence Turbopack warning - next-pwa uses webpack config
+  output: 'standalone',
 };
 
 export default withPWA(nextConfig);

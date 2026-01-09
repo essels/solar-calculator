@@ -8,28 +8,6 @@ import { jsPDF } from 'jspdf';
 import type { CalculatorResults } from '@/types/solar';
 
 /**
- * Rate limiting for PDF generation
- */
-const pdfRateLimitStore = new Map<string, { count: number; resetTime: number }>();
-
-function checkPdfRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const record = pdfRateLimitStore.get(ip);
-
-  if (!record || now > record.resetTime) {
-    pdfRateLimitStore.set(ip, { count: 1, resetTime: now + 3600000 }); // 1 hour
-    return true;
-  }
-
-  if (record.count >= 10) {
-    return false; // 10 PDFs per hour limit
-  }
-
-  record.count++;
-  return true;
-}
-
-/**
  * Generate PDF report from calculation results
  */
 function generatePdfReport(results: CalculatorResults, postcode: string): ArrayBuffer {
@@ -144,20 +122,6 @@ function generatePdfReport(results: CalculatorResults, postcode: string): ArrayB
  */
 export async function POST(request: NextRequest) {
   try {
-    // Get client IP for rate limiting
-    const ip =
-      request.headers.get('x-forwarded-for')?.split(',')[0] ||
-      request.headers.get('x-real-ip') ||
-      'unknown';
-
-    // Rate limiting
-    if (!checkPdfRateLimit(ip)) {
-      return NextResponse.json(
-        { success: false, error: 'Too many requests. Please try again later.' },
-        { status: 429 }
-      );
-    }
-
     // Parse request body
     const body = await request.json();
     const { results, postcode } = body as {
