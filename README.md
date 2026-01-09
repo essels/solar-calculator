@@ -1,157 +1,281 @@
-# 🔆 SolarQuote UK
+<p align="center">
+  <img src="docs/screenshot-landing.png" alt="SolarQuote UK - Calculate Your Solar Savings" width="800">
+</p>
 
-> **A lead generation PWA for UK solar installers** - Accurate quotes, qualified leads, autonomous development.
+<h1 align="center">SolarQuote UK</h1>
 
-## Files Created
+<p align="center">
+  <strong>Calculate your solar panel savings with accurate UK energy prices</strong>
+</p>
 
-**RALPH_PROMPT.md** — The main prompt file containing:
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="#demo">Demo</a> •
+  <a href="#getting-started">Getting Started</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#api">API</a> •
+  <a href="#accuracy">Accuracy</a>
+</p>
 
-- Complete project structure specification
-- Subagent invocation templates for Haiku research
-- Initialization steps for the first iteration
-- Incremental progress protocol (orient → subagent → select → implement → test → verify → track)
-- Completion criteria and promise
-- Blocker handling protocol
-- Critical rules and anti-patterns
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black?logo=next.js" alt="Next.js 16">
+  <img src="https://img.shields.io/badge/TypeScript-5-blue?logo=typescript" alt="TypeScript 5">
+  <img src="https://img.shields.io/badge/Tailwind-4-38B2AC?logo=tailwind-css" alt="Tailwind CSS 4">
+  <img src="https://img.shields.io/badge/PWA-Ready-5A0FC8?logo=pwa" alt="PWA Ready">
+  <img src="https://img.shields.io/badge/Tests-79%20passing-green" alt="79 Tests Passing">
+</p>
 
-**feature_list.json** — A JSON-based PRD with 45 features across 12 categories:
+---
 
-- Project Setup (3 features)
-- Data Integration (4 features) - postcodes.io, PVGIS, UK pricing
-- Calculation Engine (8 features) - sizing, generation, financials, CO2
-- UI Landing (2 features)
-- UI Calculator (5 features) - wizard steps
-- UI Results (4 features) - visualisations
-- Lead Capture (4 features) - form, scoring, PDF
-- API Routes (3 features)
-- PWA (3 features) - offline, install
-- Testing (5 features) - Jest, Playwright
-- Performance (2 features) - Core Web Vitals, Lighthouse
-- Deployment (2 features) - Vercel
+## Features
 
-**progress.txt** — Progress tracking with subagent response caching
+**For Homeowners:**
 
-**init.sh** — Build, test, and validation script
+- Get accurate solar savings estimates in under 2 minutes
+- See monthly generation forecasts based on your location
+- Calculate payback period and 25-year ROI
+- View environmental impact (CO2 savings, trees planted equivalent)
+- Download detailed PDF reports
 
-**reference_data/** — UK-specific lookup tables:
+**For Solar Installers:**
 
-- `orientation_factors.json` — Roof orientation efficiency factors
-- `regional_irradiance.json` — UK regional solar irradiance by postcode
-- `seg_tariffs.json` — Smart Export Guarantee rates by supplier
-- `system_costs.json` — Installation costs by system size tier
+- Qualified lead capture with GDPR compliance
+- Lead scoring (Hot/Warm/Cool) based on potential value
+- Webhook integration for CRM systems
+- White-label ready
 
-**src/lib/solar/** — Calculation engine:
+**Technical:**
 
-- `calculations.ts` — Core calculation functions (MCS methodology)
-- `constants.ts` — UK energy pricing (Ofgem Q1 2026)
+- Progressive Web App - works offline
+- Mobile-first responsive design
+- Real-time postcode validation via postcodes.io
+- Solar irradiance data from PVGIS satellite API
+- Current UK energy prices (Ofgem Q1 2026)
 
-**src/types/solar.ts** — TypeScript definitions
+---
 
-## How to Use
+## Demo
 
-1. Place all files in your project directory
-2. Install the ralph-wiggum plugin: `/plugin install ralph-wiggum@claude-plugins-official`
-3. Run the loop:
+<p align="center">
+  <img src="docs/screenshot-calculator.png" alt="Solar Calculator - Step by Step Wizard" width="700">
+</p>
 
-```bash
-/ralph-loop "Follow the instructions in RALPH_PROMPT.md exactly. Before each feature, invoke the Haiku subagent for codebase discovery. Read feature_list.json to understand requirements. Work incrementally, one feature at a time. Update progress.txt with subagent recommendations used and commit after each feature. Output <promise>SOLAR_QUOTE_COMPLETE</promise> when ALL features pass." --max-iterations 75 --completion-promise "SOLAR_QUOTE_COMPLETE"
-```
+**3-Step Calculator Wizard:**
 
-## Key Features
+1. **Location** - Enter your UK postcode to get local solar irradiance data
+2. **Roof Details** - Specify orientation, pitch, area, and shading
+3. **Energy Usage** - Enter your annual electricity consumption
 
-| Feature          | Implementation                   |
-| ---------------- | -------------------------------- |
-| Solar irradiance | PVGIS EU JRC API (free)          |
-| UK postcodes     | postcodes.io (free)              |
-| Electricity rate | 27.69p/kWh (Ofgem Q1 2026)       |
-| SEG export       | 15p/kWh default                  |
-| Lead scoring     | Hot/Warm/Cool based on potential |
-| PWA              | Offline calculator, installable  |
+**Instant Results:**
 
-## Subagent Pattern
+- Recommended system size (kWp)
+- Annual savings breakdown (self-consumption + SEG export)
+- Payback period and 25-year ROI
+- Monthly generation charts
+- CO2 savings with relatable comparisons
 
-Before implementing complex features, the loop invokes **Claude Haiku** to:
+---
 
-1. Scan existing code for reusable functions
-2. Verify current UK energy prices and regulations
-3. Check API documentation and rate limits
-4. Recommend test patterns based on existing tests
+## Getting Started
 
-This ensures efficient iteration and prevents duplicated code.
+### Prerequisites
 
-## Calculator Accuracy
+- Node.js 18+
+- npm or yarn
 
-Based on MCS (Microgeneration Certification Scheme) methodology:
-
-- Results within 10% of Energy Saving Trust calculator
-- Uses real PVGIS satellite data for irradiance
-- Accounts for orientation, pitch, shading factors
-- Applies 14% system losses (industry standard)
-
-## Development
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/essels/solar-calculator.git
+cd solar-calculator
+
 # Install dependencies
 npm install
 
-# Run development server
+# Start development server
 npm run dev
-
-# Run tests
-npm run test           # Unit tests
-npm run test:coverage  # With coverage report
-npm run test:e2e       # E2E tests (requires dev server)
-
-# Build for production
-npm run build
-
-# Lint and format
-npm run lint
-npm run format
 ```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Scripts
+
+| Command                 | Description              |
+| ----------------------- | ------------------------ |
+| `npm run dev`           | Start development server |
+| `npm run build`         | Build for production     |
+| `npm run start`         | Start production server  |
+| `npm run test`          | Run unit tests           |
+| `npm run test:coverage` | Run tests with coverage  |
+| `npm run test:e2e`      | Run E2E tests            |
+| `npm run lint`          | Lint code                |
+
+---
+
+## Tech Stack
+
+| Category       | Technology                                                        |
+| -------------- | ----------------------------------------------------------------- |
+| Framework      | [Next.js 16](https://nextjs.org/) (App Router)                    |
+| Language       | [TypeScript 5](https://www.typescriptlang.org/)                   |
+| Styling        | [Tailwind CSS 4](https://tailwindcss.com/)                        |
+| Charts         | [Recharts](https://recharts.org/)                                 |
+| PDF Generation | [jsPDF](https://github.com/parallax/jsPDF)                        |
+| PWA            | [next-pwa](https://github.com/shadowwalker/next-pwa)              |
+| Testing        | [Jest](https://jestjs.io/), [Playwright](https://playwright.dev/) |
+
+---
+
+## API
+
+### POST `/api/calculate`
+
+Calculate solar estimate from inputs.
+
+```json
+{
+  "inputs": {
+    "postcode": "SW1A 1AA",
+    "latitude": 51.5,
+    "longitude": -0.14,
+    "roofOrientation": "S",
+    "roofPitch": 35,
+    "roofArea": 30,
+    "shadingFactor": 1.0,
+    "annualElectricityUsage": 3500,
+    "homeOccupancy": "daytime"
+  }
+}
+```
+
+### POST `/api/leads`
+
+Submit lead with calculation results (GDPR compliant).
+
+### GET `/api/report`
+
+Generate PDF report for a calculation.
+
+---
+
+## Accuracy
+
+Based on **MCS (Microgeneration Certification Scheme)** methodology:
+
+| Factor            | Source                                                                  |
+| ----------------- | ----------------------------------------------------------------------- |
+| Solar Irradiance  | [PVGIS](https://re.jrc.ec.europa.eu/pvg_tools/en/) satellite data       |
+| Electricity Rate  | 27.69p/kWh ([Ofgem Q1 2026](https://www.ofgem.gov.uk/energy-price-cap)) |
+| SEG Export Rate   | 15p/kWh (market average)                                                |
+| System Losses     | 14% (industry standard)                                                 |
+| Panel Degradation | 0.5%/year                                                               |
+| CO2 Factor        | 0.233 kg/kWh (UK grid)                                                  |
+
+**Results are within 10% of the [Energy Saving Trust calculator](https://energysavingtrust.org.uk/tool/solar-energy-calculator/).**
+
+---
+
+## Environment Variables
+
+```bash
+# Optional - defaults are configured
+NEXT_PUBLIC_ELECTRICITY_RATE=27.69    # p/kWh
+NEXT_PUBLIC_SEG_RATE=15.0             # p/kWh
+NEXT_PUBLIC_LEAD_WEBHOOK_URL=         # Your CRM webhook
+```
+
+---
 
 ## Deployment
 
 ### Vercel (Recommended)
 
-1. Connect your repository to Vercel
-2. Set environment variables (see `.env.example`)
-3. Deploy - Vercel will auto-detect Next.js
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/essels/solar-calculator)
 
-### Environment Variables
+1. Click the button above or connect your repo to Vercel
+2. Set environment variables if needed
+3. Deploy - Vercel auto-detects Next.js
 
-```bash
-# Optional - defaults are configured
-NEXT_PUBLIC_ELECTRICITY_RATE=27.69
-NEXT_PUBLIC_SEG_RATE=15.0
-NEXT_PUBLIC_LEAD_WEBHOOK_URL=https://your-webhook.com/leads
-```
-
-### Manual Deployment
+### Docker
 
 ```bash
-npm run build
-npm run start
+docker build -t solar-calculator .
+docker run -p 3000:3000 solar-calculator
 ```
 
-## API Endpoints
+---
 
-| Endpoint         | Method | Description                          |
-| ---------------- | ------ | ------------------------------------ |
-| `/api/calculate` | POST   | Calculate solar estimate from inputs |
-| `/api/leads`     | POST   | Submit lead with calculation results |
-| `/api/report`    | GET    | Generate PDF report for calculation  |
+## Project Structure
 
-## Tech Stack
+```
+├── src/
+│   ├── app/                 # Next.js App Router pages
+│   │   ├── api/            # API routes
+│   │   ├── calculator/     # Calculator wizard
+│   │   ├── results/        # Results display
+│   │   └── thank-you/      # Post-submission page
+│   ├── components/          # React components
+│   │   ├── charts/         # Recharts visualizations
+│   │   ├── modals/         # Lead capture modal
+│   │   └── pwa/            # PWA components
+│   ├── lib/                 # Business logic
+│   │   ├── solar/          # Calculation engine
+│   │   ├── leads/          # Lead scoring
+│   │   └── validation/     # Input validation
+│   └── types/               # TypeScript definitions
+├── reference_data/          # UK lookup tables (JSON)
+├── e2e/                     # Playwright E2E tests
+└── docs/                    # Screenshots and docs
+```
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript 5
-- **Styling**: Tailwind CSS 4
-- **Charts**: Recharts
-- **PDF**: jsPDF
-- **PWA**: next-pwa
-- **Testing**: Jest, React Testing Library, Playwright
+---
+
+## Testing
+
+**79 unit tests** covering:
+
+- Calculation engine (100% coverage)
+- Lead scoring algorithm (100% coverage)
+- Input validation
+
+**8 E2E test cases** covering:
+
+- Complete user journey
+- Mobile responsiveness
+- Accessibility
+
+```bash
+# Run all tests
+npm run test
+
+# Run with coverage
+npm run test:coverage
+
+# Run E2E tests
+npm run test:e2e
+```
+
+---
+
+## Contributing
+
+Contributions are welcome! Please read our contributing guidelines before submitting a PR.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
 
 ## License
 
-MIT
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+<p align="center">
+  Made with ☀️ for UK homeowners
+</p>
