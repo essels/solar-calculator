@@ -70,6 +70,42 @@ export default function ResultsPage() {
   const [formData, setFormData] = useState<StoredFormData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [downloadingPdf, setDownloadingPdf] = useState(false);
+
+  const handleDownloadPdf = async () => {
+    if (!results || !formData) return;
+
+    setDownloadingPdf(true);
+    try {
+      const response = await fetch('/api/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          results,
+          postcode: formData.postcode,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate PDF');
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `solar-quote-${formData.postcode.replace(/\s/g, '-')}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (err) {
+      console.error('PDF download error:', err);
+      alert('Failed to download PDF. Please try again.');
+    } finally {
+      setDownloadingPdf(false);
+    }
+  };
 
   useEffect(() => {
     const loadResults = async () => {
@@ -329,8 +365,12 @@ export default function ResultsPage() {
               <button className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-6 font-semibold text-white transition-colors hover:bg-primary-dark">
                 Get Free Installer Quotes
               </button>
-              <button className="inline-flex h-12 items-center justify-center rounded-lg border border-border bg-background px-6 font-medium text-foreground transition-colors hover:bg-muted">
-                Download PDF Report
+              <button
+                onClick={handleDownloadPdf}
+                disabled={downloadingPdf}
+                className="inline-flex h-12 items-center justify-center rounded-lg border border-border bg-background px-6 font-medium text-foreground transition-colors hover:bg-muted disabled:opacity-50"
+              >
+                {downloadingPdf ? 'Generating PDF...' : 'Download PDF Report'}
               </button>
             </div>
           </div>
