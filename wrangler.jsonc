@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "solar-lead-magnet",
+  "name": "solar-calculator",
   "main": ".open-next/worker.js",
   "build": {
     "command": "npm run cf:build"
